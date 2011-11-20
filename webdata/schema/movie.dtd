@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!ELEMENT movie (title+, year, country+, director+, producer+, genre*, synopsis*, actor*)>
+<!ELEMENT movie (title+, year, country+, director+, producer+, genre*, synopsis*, actor*,review)>
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT country (#PCDATA)>
 <!ELEMENT year (#PCDATA)>
