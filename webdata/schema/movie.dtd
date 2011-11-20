@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!ELEMENT movie (original_title, alt_title*, year, country+, director+, producer+, genre*, synopsis*, actor*,review)>
 <!ELEMENT original_title (#PCDATA)>
+<!ELEMENT alt_title (#PCDATA)>
 <!ELEMENT country (#PCDATA)>
 <!ELEMENT year (#PCDATA)>
 <!ELEMENT role (#PCDATA)>
