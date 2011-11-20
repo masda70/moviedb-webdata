@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT movie (title+, year, country+, director+, producer+, genre*, synopsis*, actor*)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT country (#PCDATA)>
+<!ELEMENT year (#PCDATA)>
+<!ELEMENT role (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT director (name)>
+<!ELEMENT producer (name)>
+<!ELEMENT genre (#PCDATA)>
+<!ELEMENT actor (name, role)>
+<!ELEMENT synopsis (#PCDATA)>
+<!ELEMENT review (reviewer, rating?, comment)>
+<!ELEMENT reviewer (source,name)>
+<!ELEMENT source (#PCDATA)>
+<!ELEMENT rating (#PCDATA)>
+<!ELEMENT comment (#PCDATA)>
