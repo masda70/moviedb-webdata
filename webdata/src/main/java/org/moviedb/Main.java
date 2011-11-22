@@ -29,35 +29,49 @@ public class Main {
 		}
 	}
 	
-	public static void testXSLT() throws IOException{
-			XSLT xslt = new XSLT("schema/imdb.xslt");
+	public static void testIMDB() throws IOException{
+		XSLT xslt = new XSLT("schema/imdb.xslt");
+		
+
+		BufferedReader movies = new BufferedReader(
+				new InputStreamReader(
+						new DataInputStream(
+								new FileInputStream("movies.txt")
+								)
+						)
+				);
+		
+		String movie, name;
+		  
+		while ((movie = movies.readLine()) != null)   {
+			System.out.println(movie);
+			name = URLEncoder.encode(movie, "UTF-8");
 			
-			System.out.println("connexion...");
-			URL url = new URL("http://www.imdb.com/title/tt0068646/");
+			ByteArrayOutputStream cleaned = new ByteArrayOutputStream();
+			StreamResult result = new StreamResult("xml/"+name+".xml");
+
+			// connect to imdb
+			URL url = new URL("http://www.imdb.com/find?q=" + name);
 			URLConnection conn = url.openConnection();
 			conn.setRequestProperty("User-Agent", userAgent);
-	
 			InputStream html = conn.getInputStream();
-			ByteArrayOutputStream cleaned = new ByteArrayOutputStream();
-			StreamResult result = new StreamResult("result.xml");
 			
-			System.out.println("clean...");
+			// clean
 			xslt.clean(html, cleaned);
 			InputStream buffer = new ByteArrayInputStream(
 					cleaned.toByteArray());
 
-
+			// transform
 			System.out.println("transform...");
 			xslt.tr(buffer, result);
-			
-
+		}
 	}
 	
 	public static void main(String[] args) {
 
 		try {
-			testRT();
-			testXSLT();
+			//testRT();
+			testIMDB();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
