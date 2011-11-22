@@ -15,7 +15,7 @@ public class XSLT {
 	private PrettyXmlSerializer _serializer;
 	private Transformer _transformer;
 	
-	public XSLT () {
+	public XSLT (String schemaFile) {
 		 _cleaner = new HtmlCleaner();
 		CleanerProperties props = _cleaner.getProperties();
 		props.setPruneTags("script,style");
@@ -27,7 +27,7 @@ public class XSLT {
 
    		try {
 			_transformer = tFactory.newTransformer(
-					new StreamSource(new File("schema/imdb.xslt")));
+					new StreamSource(new File(schemaFile)));
 		} catch (TransformerConfigurationException e) {
 			e.printStackTrace();
 		}  

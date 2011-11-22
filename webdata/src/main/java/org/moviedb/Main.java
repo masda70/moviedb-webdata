@@ -27,11 +27,10 @@ public class Main {
 		} catch (FileNotFoundException e) {
 			throw new IOException("Error: Cannot write to file "+fileOut);
 		}
-
 	}
 	
 	public static void testXSLT() throws IOException{
-			XSLT xslt = new XSLT();
+			XSLT xslt = new XSLT("schema/imdb.xslt");
 			
 			System.out.println("connexion...");
 			URL url = new URL("http://www.imdb.com/title/tt0068646/");

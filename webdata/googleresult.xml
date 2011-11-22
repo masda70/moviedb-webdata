@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="Cp1252"?>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>- Google Search</title>
+	</head>
+	<body bgcolor="#ffffff" topmargin="3" marginheight="3" marginwidth="0">
+		<div id="gb">
+			<div id="gbw">
+				<div id="gbz">
+					<span class="gbtcb" />
+					<ol class="gbtc">
+						<li class="gbt">
+							<a class="gbzt" id="gb_119" href="https://plus.google.com/?tab=wX" onclick="gbar.logger.il(1,{t:119})">
+								<span class="gbtb2" />
+								<span class="gbts">+You</span>
+							</a>
+						</li>
+						<li class="gbt">
+							<a class="gbzt gbz0l gbp1" id="gb_1" href="https://www.google.com/webhp?hl=en&amp;tab=ww" onclick="gbar.logger.il(1,{t:1})">
+								<span class="gbtb2" />
+								<span class="gbts">Web</span>
+							</a>
+						</li>
+						<li class="gbt">
+							<a onclick="gbar.logger.il(1,{t:2})" class="gbzt" id="gb_2" href="https://www.google.com/search?lr=&amp;cr=&amp;safe=off&amp;btnl=745&amp;um=1&amp;ie=UTF-8&amp;hl=en&amp;tbm=isch&amp;source=og&amp;q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;sa=N&amp;tab=wi">
+								<span class="gbtb2" />
+								<span class="gbts">Images</span>
+							</a>
+						</li>
+						<li class="gbt">
+							<a onclick="gbar.logger.il(1,{t:12})" class="gbzt" id="gb_12" href="https://www.google.com/search?lr=&amp;cr=&amp;safe=off&amp;btnl=745&amp;um=1&amp;ie=UTF-8&amp;hl=en&amp;tbo=u&amp;tbm=vid&amp;source=og&amp;q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;sa=N&amp;tab=wv">
+								<span class="gbtb2" />
+								<span class="gbts">Videos</span>
+							</a>
+						</li>
+						<li class="gbt">
+							<a class="gbzt" id="gb_8" href="http://maps.google.com/maps?hl=en&amp;tab=wl" onclick="gbar.logger.il(1,{t:8})">
+								<span class="gbtb2" />
+								<span class="gbts">Maps</span>
+							</a>
+						</li>
+						<li class="gbt">
+							<a class="gbzt" id="gb_5" href="http://news.google.com/nwshp?hl=en&amp;tab=wn" onclick="gbar.logger.il(1,{t:5})">
+								<span class="gbtb2" />
+								<span class="gbts">News</span>
+							</a>
+						</li>
+						<li class="gbt">
+							<a class="gbzt" id="gb_23" href="https://mail.google.com/mail/?tab=wm" onclick="gbar.logger.il(1,{t:23})">
+								<span class="gbtb2" />
+								<span class="gbts">Gmail</span>
+							</a>
+						</li>
+						<li class="gbt">
+							<a class="gbgt" id="gbztm" href="http://www.google.com/intl/en/options/" onclick="gbar.tg(event,this)" aria-haspopup="true" aria-owns="gbd">
+								<span class="gbtb2" />
+								<span id="gbztms" class="gbts gbtsa">
+									<span id="gbztms1">More</span>
+									<span class="gbma" />
+								</span>
+							</a>
+							<div class="gbm" id="gbd" aria-owner="gbztm">
+								<div class="gbmc">
+									<ol class="gbmcc">
+										<li class="gbmtc">
+											<a onclick="gbar.logger.il(1,{t:6})" class="gbmt" id="gb_6" href="https://www.google.com/search?lr=&amp;cr=&amp;safe=off&amp;btnl=745&amp;um=1&amp;ie=UTF-8&amp;hl=en&amp;tbo=u&amp;tbm=shop&amp;source=og&amp;q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;sa=N&amp;tab=wf">Shopping</a>
+										</li>
+										<li class="gbmtc">
+											<a onclick="gbar.logger.il(1,{t:51})" class="gbmt" id="gb_51" href="http://translate.google.com/?lr=&amp;cr=&amp;safe=off&amp;btnl=745&amp;um=1&amp;ie=UTF-8&amp;hl=en&amp;q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;sa=N&amp;tab=wT">Translate</a>
+										</li>
+										<li class="gbmtc">
+											<a onclick="gbar.logger.il(1,{t:10})" class="gbmt" id="gb_10" href="https://www.google.com/search?lr=&amp;cr=&amp;safe=off&amp;btnl=745&amp;um=1&amp;ie=UTF-8&amp;hl=en&amp;tbo=u&amp;tbm=bks&amp;source=og&amp;q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;sa=N&amp;tab=wp">Books</a>
+										</li>
+										<li class="gbmtc">
+											<a onclick="gbar.logger.il(1,{t:27})" class="gbmt" id="gb_27" href="http://www.google.com/finance?lr=&amp;cr=&amp;safe=off&amp;btnl=745&amp;um=1&amp;ie=UTF-8&amp;q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;sa=N&amp;tab=we">Finance</a>
+										</li>
+										<li class="gbmtc">
+											<a onclick="gbar.logger.il(1,{t:9})" class="gbmt" id="gb_9" href="http://scholar.google.com/scholar?lr=&amp;cr=&amp;safe=off&amp;btnl=745&amp;um=1&amp;ie=UTF-8&amp;hl=en&amp;q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;sa=N&amp;tab=ws">Scholar</a>
+										</li>
+										<li class="gbmtc">
+											<a onclick="gbar.logger.il(1,{t:13})" class="gbmt" id="gb_13" href="https://www.google.com/search?lr=&amp;cr=&amp;safe=off&amp;btnl=745&amp;um=1&amp;ie=UTF-8&amp;hl=en&amp;tbo=u&amp;tbm=blg&amp;source=og&amp;q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;sa=N&amp;tab=wb">Blogs</a>
+										</li>
+										<li class="gbmtc">
+											<div class="gbmt gbmh" />
+										</li>
+										<li class="gbmtc">
+											<a onclick="gbar.logger.il(1,{t:36})" class="gbmt" id="gb_36" href="http://www.youtube.com/results?lr=&amp;cr=&amp;safe=off&amp;btnl=745&amp;um=1&amp;ie=UTF-8&amp;q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;sa=N&amp;tab=w1">YouTube</a>
+										</li>
+										<li class="gbmtc">
+											<a class="gbmt" id="gb_24" href="https://www.google.com/calendar?lr=&amp;cr=&amp;safe=off&amp;btnl=745&amp;um=1&amp;ie=UTF-8&amp;q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;sa=N&amp;tab=wc" onclick="gbar.logger.il(1,{t:24})">Calendar</a>
+										</li>
+										<li class="gbmtc">
+											<a onclick="gbar.logger.il(1,{t:31})" class="gbmt" id="gb_31" href="http://picasaweb.google.com/lh/view?lr=&amp;cr=&amp;safe=off&amp;btnl=745&amp;um=1&amp;ie=UTF-8&amp;hl=en&amp;q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;quot;Titanic%20(1997)=&amp;quot;%20site:rottentomatoes.com=&amp;sa=N&amp;tab=wq">Photos</a>
+										</li>
+										<li class="gbmtc">
+											<a class="gbmt" id="gb_25" href="https://docs.google.com/?tab=wo" onclick="gbar.logger.il(1,{t:25})">Documents</a>
+										</li>
+										<li class="gbmtc">
+											<a class="gbmt" id="gb_38" href="https://sites.google.com/?tab=w3" onclick="gbar.logger.il(1,{t:38})">Sites</a>
+										</li>
+										<li class="gbmtc">
+											<a onclick="gbar.logger.il(1,{t:3})" class="gbmt" id="gb_3" href="http://groups.google.com/groups?lr=&amp;safe=off&amp;btnl=745&amp;um=1&amp;ie=UTF-8&amp;hl=en&amp;q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;sa=N&amp;tab=wg">Groups</a>
+										</li>
+										<li class="gbmtc">
+											<a class="gbmt" id="gb_32" href="http://www.google.com/reader/view/?hl=en&amp;tab=wy" onclick="gbar.logger.il(1,{t:32})">Reader</a>
+										</li>
+										<li class="gbmtc">
+											<div class="gbmt gbmh" />
+										</li>
+										<li class="gbmtc">
+											<a class="gbmt" onclick="gbar.logger.il(1,{t:66})" href="http://www.google.com/intl/en/options/">Even more »</a>
+										</li>
+									</ol>
+								</div>
+							</div>
+						</li>
+					</ol>
+				</div>
+				<div id="gbg">
+					<h2 class="gbxx">Account Options</h2>
+					<span class="gbtcb" />
+					<ol class="gbtc">
+						<li class="gbt">
+							<a href="https://accounts.google.com/ServiceLogin?hl=en&amp;continue=https://www.google.com/search%3Fas_q%3D%2522Titanic%2B(1997)%2522%26as_epq%3D%26as_oq%3D%26as_eq%3D%26as_nlo%3D%26as_nhi%3D%26lr%3D%26cr%3D%26as_qdr%3Dall%26as_sitesearch%3Drottentomatoes.com%26as_occt%3Dany%26safe%3Doff%26tbs%3D%26as_filetype%3D%26as_rights%3D%26btnl%3D745" onclick="gbar.logger.il(9,{l:&apos;i&apos;})" id="gb_70" class="gbgt">
+								<span class="gbtb2" />
+								<span id="gbgs4" class="gbts">
+									<span id="gbi4s1">Sign in</span>
+								</span>
+							</a>
+						</li>
+						<li class="gbt gbtb">
+							<span class="gbts" />
+						</li>
+						<li class="gbt">
+							<a class="gbgt" id="gbg5" href="http://www.google.com/preferences?hl=en" title="Options" onclick="gbar.tg(event,this)" aria-haspopup="true" aria-owns="gbd5">
+								<span class="gbtb2" />
+								<span id="gbgs5" class="gbts">
+									<span id="gbi5" />
+								</span>
+							</a>
+							<div class="gbm" id="gbd5" aria-owner="gbg5">
+								<div class="gbmc">
+									<ol id="gbom" class="gbmcc">
+										<li class="gbkc gbmtc">
+											<a class="gbmt" href="/preferences?hl=en">Search settings</a>
+										</li>
+										<li class="gbmtc">
+											<div class="gbmt gbmh" />
+										</li>
+										<li class="gbkp gbmtc">
+											<a class="gbmt" href="http://www.google.com/history/optout?hl=en">Web History</a>
+										</li>
+									</ol>
+								</div>
+							</div>
+						</li>
+					</ol>
+				</div>
+			</div>
+			<div id="gbx3" />
+			<div id="gbx4" />
+		</div>
+		<br clear="all" />
+		<table border="0" cellpadding="0" cellspacing="0" id="mn" style="position:relative">
+			<tbody>
+				<tr>
+					<td rowspan="2" valign="top" width="157">
+						<h1>
+							<a href="/webhp?hl=" id="logo" title="Go to Google Home">
+								<img src="/images/nav_logo_hp2.png" alt="" height="222" style="border:0" width="167" />
+							</a>
+						</h1>
+					</td>
+					<td valign="top" style="padding-left:9px" width="559">
+						<form name="gs" id="tsf" method="GET" action="/search" style="display:block;margin:0;background:none">
+							<table border="0" cellpadding="0" cellspacing="0" id="sbhost" style="border-bottom:1px solid #e7e7e7;margin-top:18px;position:relative">
+								<tbody>
+									<tr>
+										<td class="lst-td" width="100%" valign="bottom" style="">
+											<div style="position:relative;zoom:1">
+												<input autocomplete="off" class="lst" type="text" name="q" maxlength="2048" title="Search" value="&quot;Titanic (1997)&quot; site:rottentomatoes.com" />
+											</div>
+										</td>
+										<td>
+											<div class="ds">
+												<div class="lsbb">
+													<input type="submit" name="btnG" class="lsb" value="Search" />
+												</div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<input type="hidden" name="as_q" value="&quot;Titanic (1997)&quot;" />
+							<input type="hidden" name="as_nlo" value="" />
+							<input type="hidden" name="as_nhi" value="" />
+							<input type="hidden" name="lr" value="" />
+							<input type="hidden" name="cr" value="" />
+							<input type="hidden" name="safe" value="off" />
+							<input type="hidden" name="tbs" value="" />
+							<input type="hidden" name="btnl" value="745" />
+						</form>
+					</td>
+					<td style="padding-left:5px" width="259">
+						<a href="/preferences?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;as_qdr=all&amp;amp;sa=F" class="fl" style="
+      font-size:11px;margin-left:8px
+    ">SafeSearch is off</a>
+					</td>
+				</tr>
+				<tr>
+					<td width="100%">
+						<div id="subform_ctrl">
+							<div style="float:right">
+								<a class="fl" href="/advanced_search?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;as_qdr=all&amp;amp;prmd=ivns">Advanced search</a>
+							</div>
+							<div>About 84,600 results</div>
+						</div>
+					</td>
+					<td />
+				</tr>
+				<tr>
+					<td valign="top" id="leftnav" style="padding:4px">
+						<div id="modeselector" style="padding-bottom:4px">
+							<ul>
+								<li class="mitem msel">
+									<span class="micon" style="
+          background-position:-20px -132px
+        " />
+									Everything
+								</li>
+								<li class="mitem">
+									<a href="/search?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;prmd=ivns&amp;amp;source=lnms&amp;amp;tbm=isch&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;sa=X&amp;amp;oi=mode_link&amp;amp;ct=mode&amp;amp;cd=2&amp;amp;ved=0CAUQ_AUoAQ" class="q">
+										<span class="micon" style="
+          background-position:-40px -132px
+        " />
+										Images
+									</a>
+								</li>
+								<li class="mitem">
+									<a href="/search?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;prmd=ivns&amp;amp;source=lnms&amp;amp;tbm=vid&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;sa=X&amp;amp;oi=mode_link&amp;amp;ct=mode&amp;amp;cd=3&amp;amp;ved=0CAYQ_AUoAg" class="q">
+										<span class="micon" style="
+          background-position:-80px -132px
+        " />
+										Videos
+									</a>
+								</li>
+								<li class="mitem">
+									<a href="/search?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;prmd=ivns&amp;amp;source=lnms&amp;amp;tbm=nws&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;sa=X&amp;amp;oi=mode_link&amp;amp;ct=mode&amp;amp;cd=4&amp;amp;ved=0CAcQ_AUoAw" class="q">
+										<span class="micon" style="
+          background-position:-120px -132px
+        " />
+										News
+									</a>
+								</li>
+								<li class="mitem">
+									<a href="/search?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;prmd=ivns&amp;amp;source=lnms&amp;amp;tbm=shop&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;sa=X&amp;amp;oi=mode_link&amp;amp;ct=mode&amp;amp;cd=5&amp;amp;ved=0CAgQ_AUoBA" class="q">
+										<span class="micon" style="
+          background-position:-120px -152px
+        " />
+										Shopping
+									</a>
+								</li>
+							</ul>
+							<a id="showmodes" class="q" href="/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;prmdo=1&amp;amp;sa=X">
+								<span class="micon" />
+								<span class="msm">More</span>
+							</a>
+						</div>
+						<div class="lnsec">
+							<h2 class="hd">Search Options</h2>
+							<ul id="tbd" class="med">
+								<li>
+									<ul class="tbt" />
+								</li>
+								<li>
+									<ul class="tbt" />
+								</li>
+							</ul>
+							<a href="/search?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;as_qdr=all&amp;amp;prmd=ivns&amp;amp;tbo=1" class="q" style="display:block;margin-bottom:16px">Show search tools</a>
+						</div>
+					</td>
+					<td valign="top">
+						<div id="center_col">
+							<div id="res">
+								<div id="ires">
+									<ol>
+										<li class="g">
+											<h3 class="r">
+												<a href="http://www.rottentomatoes.com/m/titanic/" onmousedown="return hlprwt(this, &apos;/url?q=http://www.rottentomatoes.com/m/titanic/&amp;amp;sa=U&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;ved=0CBEQFjAA&amp;amp;usg=AFQjCNFb73JvBBZ6Q-glcYkJSbp4PCmuWw&apos;)">Titanic - Rotten Tomatoes</a>
+											</h3>
+											<div class="f">
+												<div class="star" style="float:left;margin-top:3px">
+													<div style="width:40px">.</div>
+												</div>
+												 Rating: 83% - 98 reviews
+											</div>
+											<div class="s">
+												19 Dec 1997
+												<b>...</b>
+												<b>Titanic (1997</b>
+												). tomatometer. All Critics; Top Critics. 83. Average Rating: 7.4/10.
+												<br />
+												Reviews Counted: 98. Fresh: 81 | Rotten: 17. A mostly
+												<b>...</b>
+												<br />
+												<div>
+													<cite>www.rottentomatoes.com/m/titanic/</cite>
+													<span class="flc">
+														-
+														<a href="//webcache.googleusercontent.com/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;q=cache:oICsrGnlbv8J:http://www.rottentomatoes.com/m/titanic/+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;ct=clnk">Cached</a>
+														-
+														<a href="/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;tbo=1&amp;amp;q=related:http://www.rottentomatoes.com/m/titanic/+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;sa=X">Similar</a>
+													</span>
+												</div>
+											</div>
+										</li>
+										<li class="g">
+											<h3 class="r">
+												<a href="http://www.rottentomatoes.com/m/chambermaid_on_the_titanic/" onmousedown="return hlprwt(this, &apos;/url?q=http://www.rottentomatoes.com/m/chambermaid_on_the_titanic/&amp;amp;sa=U&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;ved=0CBQQFjAB&amp;amp;usg=AFQjCNGDxWALX3j1qwIyZeTqSPOL3GGxwg&apos;)">
+													La Femme de chambre du Titanic (The Chambermaid on the Titanic
+													<b>...</b>
+												</a>
+											</h3>
+											<div class="f">
+												<div class="star" style="float:left;margin-top:3px">
+													<div style="width:40px">.</div>
+												</div>
+												 Rating: 81% - 16 reviews
+											</div>
+											<div class="s">
+												La Femme de chambre du Titanic (The Chambermaid on the
+												<b>Titanic) (1997</b>
+												).
+												<br />
+												tomatometer. All Critics; Top Critics. 81. Average Rating: 6.5/10. Reviews
+												<br />
+												Counted:
+												<b>...</b>
+												<br />
+												<div>
+													<cite>www.rottentomatoes.com/m/chambermaid_on_the_titanic/</cite>
+													<span class="flc">
+														-
+														<a href="//webcache.googleusercontent.com/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;q=cache:Y8Yq_Dayr3IJ:http://www.rottentomatoes.com/m/chambermaid_on_the_titanic/+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;ct=clnk">Cached</a>
+														-
+														<a href="/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;tbo=1&amp;amp;q=related:http://www.rottentomatoes.com/m/chambermaid_on_the_titanic/+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;sa=X">Similar</a>
+													</span>
+												</div>
+											</div>
+										</li>
+										<li class="g">
+											<h3 class="r">
+												<a href="http://www.rottentomatoes.com/vine/showthread.php?p=16599882" onmousedown="return hlprwt(this, &apos;/url?q=http://www.rottentomatoes.com/vine/showthread.php%3Fp%3D16599882&amp;amp;sa=U&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;ved=0CBcQFjAC&amp;amp;usg=AFQjCNEtwS_CAhBmMm4RN-Z2zgNPwgBpyg&apos;)">
+													<b>Titanic (1997</b>
+													) is still a modern classic after all these years
+													<b>...</b>
+												</a>
+											</h3>
+											<div class="s">
+												<b>Titanic (1997</b>
+												) is still a modern classic after all these years. General
+												<br />
+												Discussion.
+												<br />
+												<div>
+													<cite>www.rottentomatoes.com/vine/showthread.php?p=16599882</cite>
+													<span class="flc">
+														-
+														<a href="//webcache.googleusercontent.com/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;q=cache:wAUYCgoaVXgJ:http://www.rottentomatoes.com/vine/showthread.php?p=16599882+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;ct=clnk">Cached</a>
+														-
+														<a href="/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;tbo=1&amp;amp;q=related:http://www.rottentomatoes.com/vine/showthread.php?p=16599882+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;sa=X">Similar</a>
+													</span>
+												</div>
+											</div>
+										</li>
+										<li class="g">
+											<h3 class="r">
+												<a href="http://www.rottentomatoes.com/guides/best_of_the_best_pictures/4/" onmousedown="return hlprwt(this, &apos;/url?q=http://www.rottentomatoes.com/guides/best_of_the_best_pictures/4/&amp;amp;sa=U&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;ved=0CB0QFjAD&amp;amp;usg=AFQjCNHad1RLBrqYq0RrE_FI26n_oSOdZw&apos;)">Best Of The Best Pictures - Gentleman&amp;#39;s Agreement - Rotten Tomatoes</a>
+											</h3>
+											<div class="s">
+												<b>Titanic (1997</b>
+												). Critics Consensus: A mostly unqualified triumph for Cameron, who
+												<br />
+												offers a dizzying blend of spectacular visuals and old-fashioned melodrama.
+												<b>...</b>
+												<br />
+												<div>
+													<cite>www.rottentomatoes.com/guides/best_of_the_best_pictures/4/</cite>
+													<span class="flc">
+														-
+														<a href="//webcache.googleusercontent.com/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;q=cache:cNFtnW4SCFYJ:http://www.rottentomatoes.com/guides/best_of_the_best_pictures/4/+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;ct=clnk">Cached</a>
+														-
+														<a href="/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;tbo=1&amp;amp;q=related:http://www.rottentomatoes.com/guides/best_of_the_best_pictures/4/+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;sa=X">Similar</a>
+													</span>
+												</div>
+											</div>
+										</li>
+										<li class="g">
+											<h3 class="r">
+												<a href="http://www.rottentomatoes.com/critic/jason-bacon/" onmousedown="return hlprwt(this, &apos;/url?q=http://www.rottentomatoes.com/critic/jason-bacon/&amp;amp;sa=U&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;ved=0CB8QFjAE&amp;amp;usg=AFQjCNEjDBwQ5YHefLTbISQLjAtxLfYdwQ&apos;)">Jason Bacon Movie Reviews &amp;amp; Previews - Rotten Tomatoes</a>
+											</h3>
+											<div class="s">
+												4/4, 83%,
+												<b>Titanic (1997</b>
+												), â€” rec.arts.movies.reviews. Posted Jan 1, 2000. â€”, 86%,
+												<br />
+												Jackie Brown (1997), â€” rec.arts.movies.reviews. Posted Jan 1, 2000
+												<b>...</b>
+												<br />
+												<div>
+													<cite>www.rottentomatoes.com/critic/jason-bacon/</cite>
+													<span class="flc">
+														-
+														<a href="//webcache.googleusercontent.com/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;q=cache:ZM_r1Ir5le8J:http://www.rottentomatoes.com/critic/jason-bacon/+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;ct=clnk">Cached</a>
+														-
+														<a href="/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;tbo=1&amp;amp;q=related:http://www.rottentomatoes.com/critic/jason-bacon/+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;sa=X">Similar</a>
+													</span>
+												</div>
+											</div>
+										</li>
+										<li class="g">
+											<h3 class="r">
+												<a href="http://www.rottentomatoes.com/m/raise_the_titanic/movies_like_raise_the_titanic/" onmousedown="return hlprwt(this, &apos;/url?q=http://www.rottentomatoes.com/m/raise_the_titanic/movies_like_raise_the_titanic/&amp;amp;sa=U&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;ved=0CCEQFjAF&amp;amp;usg=AFQjCNGSzd8bEJa0YHdObQAKbGp2h3_h1g&apos;)">Movies Like Raise the Titanic - Rotten Tomatoes</a>
+											</h3>
+											<div class="s">
+												83%,
+												<b>Titanic (1997</b>
+												), Lafe F, +19. Login with Facebook to share your reviews with
+												<br />
+												friends, create a want-to-see list, and more! Login with Facebook. Help | About
+												<b>...</b>
+												<br />
+												<div>
+													<cite>www.rottentomatoes.com/m/raise.../movies_like_raise_the_titanic/</cite>
+													<span class="flc">
+														-
+														<a href="//webcache.googleusercontent.com/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;q=cache:SkJPTjwdiXsJ:http://www.rottentomatoes.com/m/raise_the_titanic/movies_like_raise_the_titanic/+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;ct=clnk">Cached</a>
+														-
+														<a href="/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;tbo=1&amp;amp;q=related:http://www.rottentomatoes.com/m/raise_the_titanic/movies_like_raise_the_titanic/+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;sa=X">Similar</a>
+													</span>
+												</div>
+											</div>
+										</li>
+										<li class="g">
+											<h3 class="r">
+												<a href="http://www.rottentomatoes.com/m/1056130-titanic/movies_like_1056130-titanic/" onmousedown="return hlprwt(this, &apos;/url?q=http://www.rottentomatoes.com/m/1056130-titanic/movies_like_1056130-titanic/&amp;amp;sa=U&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;ved=0CCMQFjAG&amp;amp;usg=AFQjCNE0JUvnWQyPIV8jYuJno_qLxYhSpA&apos;)">Movies Like Titanic - Rotten Tomatoes</a>
+											</h3>
+											<div class="s">
+												2 Sep 2003
+												<b>...</b>
+												83%,
+												<b>Titanic (1997</b>
+												), Rick C, +2699. Titanic (1996), Rebecca E, +66. 54%, Pirates
+												<br />
+												of the Caribbean: Dead Man&amp;#39;s Chest (2006), Darshi N, +30
+												<b>...</b>
+												<br />
+												<div>
+													<cite>www.rottentomatoes.com/m/1056130.../movies_like_1056130-titanic/</cite>
+													<span class="flc">
+														-
+														<a href="//webcache.googleusercontent.com/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;q=cache:SvLnDZMvf9AJ:http://www.rottentomatoes.com/m/1056130-titanic/movies_like_1056130-titanic/+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;ct=clnk">Cached</a>
+														-
+														<a href="/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;tbo=1&amp;amp;q=related:http://www.rottentomatoes.com/m/1056130-titanic/movies_like_1056130-titanic/+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;sa=X">Similar</a>
+													</span>
+												</div>
+											</div>
+										</li>
+										<li class="g">
+											<h3 class="r">
+												<a href="http://www.rottentomatoes.com/user/myfajahas400children/" onmousedown="return hlprwt(this, &apos;/url?q=http://www.rottentomatoes.com/user/myfajahas400children/&amp;amp;sa=U&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;ved=0CCUQFjAH&amp;amp;usg=AFQjCNEVETq7w6yGwTW-eQ0mE6qbB5vbhQ&apos;)">ROTTEN TOMATOES: James B.&amp;#39;s Movie Profile</a>
+											</h3>
+											<div class="s">
+												<b>Titanic (1997</b>
+												). 80%. Titanic is the story of Rose and Jack, separated by class,
+												<br />
+												who fall in love on the &amp;quot;Titanic&amp;quot;. Unfortunately, the ship hits an ice berg
+												<b>...</b>
+												<br />
+												<div>
+													<cite>www.rottentomatoes.com/user/myfajahas400children/</cite>
+													<span class="flc">
+														-
+														<a href="//webcache.googleusercontent.com/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;q=cache:htsnnsssUg0J:http://www.rottentomatoes.com/user/myfajahas400children/+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;ct=clnk">Cached</a>
+														-
+														<a href="/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;tbo=1&amp;amp;q=related:http://www.rottentomatoes.com/user/myfajahas400children/+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;sa=X">Similar</a>
+													</span>
+												</div>
+											</div>
+										</li>
+										<li class="g">
+											<h3 class="r">
+												<a href="http://www.rottentomatoes.com/m/notebook/comments.php?reviewid=1350180" onmousedown="return hlprwt(this, &apos;/url?q=http://www.rottentomatoes.com/m/notebook/comments.php%3Freviewid%3D1350180&amp;amp;sa=U&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;ved=0CCcQFjAI&amp;amp;usg=AFQjCNHeh6tARGVJ26yVbYjd-KaE9Tt3Kg&apos;)">The Notebook - Review Comments - Rotten Tomatoes</a>
+											</h3>
+											<div class="s">
+												8 Feb 2005
+												<b>...</b>
+												The Notebook is one of the best movies ever except Twilight (2008) and
+												<b>Titanic (</b>
+												<br />
+												<b>1997</b>
+												)!!!!!!!!!!!!!!!!!! 2 Replies
+												<b>...</b>
+												<br />
+												<div>
+													<cite>www.rottentomatoes.com/m/.../comments.php?...</cite>
+													<span class="flc">
+														-
+														<a href="//webcache.googleusercontent.com/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;q=cache:sSSIyI7S_xEJ:http://www.rottentomatoes.com/m/notebook/comments.php?reviewid=1350180+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;ct=clnk">Cached</a>
+														-
+														<a href="/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;tbo=1&amp;amp;q=related:http://www.rottentomatoes.com/m/notebook/comments.php?reviewid=1350180+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;sa=X">Similar</a>
+													</span>
+												</div>
+											</div>
+										</li>
+										<li class="g">
+											<h3 class="r">
+												<a href="http://www.rottentomatoes.com/celebrity/james_cameron/biography.php" onmousedown="return hlprwt(this, &apos;/url?q=http://www.rottentomatoes.com/celebrity/james_cameron/biography.php&amp;amp;sa=U&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;ved=0CCkQFjAJ&amp;amp;usg=AFQjCNHlOIDl4wjxZ01mAxGXjUefJbfErg&apos;)">James Cameron Biography - Rotten Tomatoes</a>
+											</h3>
+											<div class="s">
+												While editing
+												<b>Titanic (1997</b>
+												) Cameron had a razor blade taped to the side of the
+												<br />
+												editing
+												<b>...</b>
+												Jokingly refers to
+												<b>Titanic (1997</b>
+												) as his 190 Million Dollar &amp;quot;Chick Flick&amp;quot;.
+												<b>...</b>
+												<br />
+												<div>
+													<cite>www.rottentomatoes.com/celebrity/james_cameron/biography.php</cite>
+													<span class="flc">
+														-
+														<a href="//webcache.googleusercontent.com/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;q=cache:on3rVqKCGw0J:http://www.rottentomatoes.com/celebrity/james_cameron/biography.php+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;ct=clnk">Cached</a>
+														-
+														<a href="/search?as_q=%22Titanic+(1997)%22&amp;amp;as_epq=&amp;amp;as_oq=&amp;amp;as_eq=&amp;amp;as_nlo=&amp;amp;as_nhi=&amp;amp;lr=&amp;amp;cr=&amp;amp;as_qdr=all&amp;amp;as_sitesearch=rottentomatoes.com&amp;amp;as_occt=any&amp;amp;safe=off&amp;amp;tbs=&amp;amp;as_filetype=&amp;amp;as_rights=&amp;amp;btnl=745&amp;amp;hl=en&amp;amp;tbo=1&amp;amp;q=related:http://www.rottentomatoes.com/celebrity/james_cameron/biography.php+%22Titanic+(1997)%22+site%3Arottentomatoes.com&amp;amp;sa=X">Similar</a>
+													</span>
+												</div>
+											</div>
+										</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+						<div id="foot">
+							<table align="center" border="0" cellpadding="0" cellspacing="0" id="nav">
+								<tbody>
+									<tr valign="top">
+										<td class="b" align="left">
+											<span class="csb ch" style="background-position:-24px 0;width:28px" />
+											<b />
+										</td>
+										<td>
+											<span class="csb ch" style="background-position:-53px 0;width:20px" />
+											<b>1</b>
+										</td>
+										<td>
+											<a href="/search?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;as_qdr=all&amp;amp;prmd=ivns&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;start=10&amp;amp;sa=N" class="fl">
+												<span class="csb ch" style="background-position:-74px 0;width:20px" />
+												2
+											</a>
+										</td>
+										<td>
+											<a href="/search?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;as_qdr=all&amp;amp;prmd=ivns&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;start=20&amp;amp;sa=N" class="fl">
+												<span class="csb ch" style="background-position:-74px 0;width:20px" />
+												3
+											</a>
+										</td>
+										<td>
+											<a href="/search?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;as_qdr=all&amp;amp;prmd=ivns&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;start=30&amp;amp;sa=N" class="fl">
+												<span class="csb ch" style="background-position:-74px 0;width:20px" />
+												4
+											</a>
+										</td>
+										<td>
+											<a href="/search?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;as_qdr=all&amp;amp;prmd=ivns&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;start=40&amp;amp;sa=N" class="fl">
+												<span class="csb ch" style="background-position:-74px 0;width:20px" />
+												5
+											</a>
+										</td>
+										<td>
+											<a href="/search?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;as_qdr=all&amp;amp;prmd=ivns&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;start=50&amp;amp;sa=N" class="fl">
+												<span class="csb ch" style="background-position:-74px 0;width:20px" />
+												6
+											</a>
+										</td>
+										<td>
+											<a href="/search?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;as_qdr=all&amp;amp;prmd=ivns&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;start=60&amp;amp;sa=N" class="fl">
+												<span class="csb ch" style="background-position:-74px 0;width:20px" />
+												7
+											</a>
+										</td>
+										<td>
+											<a href="/search?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;as_qdr=all&amp;amp;prmd=ivns&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;start=70&amp;amp;sa=N" class="fl">
+												<span class="csb ch" style="background-position:-74px 0;width:20px" />
+												8
+											</a>
+										</td>
+										<td>
+											<a href="/search?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;as_qdr=all&amp;amp;prmd=ivns&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;start=80&amp;amp;sa=N" class="fl">
+												<span class="csb ch" style="background-position:-74px 0;width:20px" />
+												9
+											</a>
+										</td>
+										<td>
+											<a href="/search?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;as_qdr=all&amp;amp;prmd=ivns&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;start=90&amp;amp;sa=N" class="fl">
+												<span class="csb ch" style="background-position:-74px 0;width:20px" />
+												10
+											</a>
+										</td>
+										<td class="b" style="text-align:left">
+											<a href="/search?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;as_qdr=all&amp;amp;prmd=ivns&amp;amp;ei=dOzKTun_E8nLswar7pzGDA&amp;amp;start=10&amp;amp;sa=N" style="text-align:left">
+												<span class="csb ch" style="background-position:-96px 0;width:71px" />
+												<span style="display:block;margin-left:53px">Next</span>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div>
+								<div style="margin-top:22px">
+									<form method="GET" action="/search">
+										<table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-bottom:1px solid #e7e7e7;padding:8px 0 0;position:relative">
+											<tbody>
+												<tr>
+													<td class="lst-td" width="100%" valign="bottom">
+														<div style="position:relative;zoom:1">
+															<input autocomplete="off" class="lst" type="text" name="q" maxlength="2048" value="&quot;Titanic (1997)&quot; site:rottentomatoes.com" title="Search" />
+														</div>
+													</td>
+													<td>
+														<div class="ds">
+															<div class="lsbb">
+																<input type="submit" name="btnG" class="lsb" value="Search" />
+															</div>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<input type="hidden" name="as_q" value="&quot;Titanic (1997)&quot;" />
+										<input type="hidden" name="as_nlo" value="" />
+										<input type="hidden" name="as_nhi" value="" />
+										<input type="hidden" name="lr" value="" />
+										<input type="hidden" name="cr" value="" />
+										<input type="hidden" name="safe" value="off" />
+										<input type="hidden" name="tbs" value="" />
+										<input type="hidden" name="btnl" value="745" />
+										<input type="hidden" name="hl" value="en" />
+									</form>
+								</div>
+								<p id="bfl" class="flc" style="margin:6px 0 0;text-align:center">
+									<a href="/support/websearch/bin/answer.py?answer=134479&amp;amp;hl=en">Search Help</a>
+									<a href="/quality_form?q=%22Titanic+(1997)%22+site:rottentomatoes.com&amp;amp;hl=en&amp;amp;lr=&amp;amp;safe=off&amp;amp;as_qdr=all&amp;amp;prmd=ivns">Give us feedback</a>
+								</p>
+							</div>
+							<div id="fll" class="flc" style="margin:19px auto 19px auto;text-align:center">
+								<a href="/">Google&amp;#160;Home</a>
+								<a href="
+         /intl/en/ads/">Advertising&amp;#160;Programs</a>
+								<a href="/services">Business Solutions</a>
+								<a href="/intl/en/privacy.html">Privacy</a>
+								<a href="/intl/en/about.html">About Google</a>
+							</div>
+						</div>
+					</td>
+					<td valign="top" />
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>
