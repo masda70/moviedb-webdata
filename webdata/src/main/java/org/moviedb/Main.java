@@ -2,6 +2,7 @@ package org.moviedb;
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 
 import net.sf.saxon.s9api.SaxonApiException;
 
@@ -81,10 +82,12 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
-		
+		/*
 		try {
-			//testRT();
+			testRT();
 			testIMDB();
+			
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,7 +95,30 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+*/
+		try {
+		
+				IMDBMovieListExtractor movieExtractor= new IMDBMovieListExtractor();
+			String year = "1960";
+			int pageFrom = 0;
+			int pageTo = 10;
+			System.out.println("Extracting IMDB list, year "+ year +" pages from "+pageFrom+" to "+(pageTo-1)+".");
+			ArrayList<URL> list = movieExtractor.getList(year, pageFrom, pageTo);
+			String outputFile = "data/IMDB_y"+year+"("+pageFrom+","+(pageTo-1)+").object";
+			System.out.println("Done. Output at "+outputFile+".");
+			ObjectOutputStream oos;
 
+			oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File(outputFile))));
+		
+			oos.writeObject(list);
+			oos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -43,14 +43,12 @@ public class RTProcessor {
 	
 	private OutputStream out;
 	WebXMLExtractor web;
-	private XSLT xsltProcessor; 
     XPathSelector selector;
     Processor epicSAXProcessor;
 	public RTProcessor( OutputStream _out){
 		try {
 			out = _out;
 			web = new WebXMLExtractor();
-			xsltProcessor = new XSLT("schema/googlefirstresult.xslt");
 
 			epicSAXProcessor= new Processor(false);
 			XPathCompiler xpath = epicSAXProcessor.newXPathCompiler();
