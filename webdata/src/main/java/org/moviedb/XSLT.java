@@ -5,48 +5,38 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.xml.transform.*;
-import javax.xml.transform.stream.*;
+import javax.xml.transform.stream.StreamSource;
 
-import org.htmlcleaner.*;
+import net.sf.saxon.s9api.Processor;
+import net.sf.saxon.s9api.SaxonApiException;
+import net.sf.saxon.s9api.Serializer;
+import net.sf.saxon.s9api.XdmNode;
+import net.sf.saxon.s9api.XsltTransformer;
+
 
 public class XSLT {
-	private HtmlCleaner _cleaner;
-	private PrettyXmlSerializer _serializer;
-	private Transformer _transformer;
+
+	private Processor epicSAXProcessor;
+
+	private XsltTransformer xsltTransformer;
 	
-	public XSLT (String schemaFile) {
-		 _cleaner = new HtmlCleaner();
-		CleanerProperties props = _cleaner.getProperties();
-		props.setPruneTags("script,style");
-		props.setRecognizeUnicodeChars(false);
-		props.setAdvancedXmlEscape(false);
-
-		_serializer= new PrettyXmlSerializer(props);
-		TransformerFactory tFactory = TransformerFactory.newInstance();
-
-   		try {
-			_transformer = tFactory.newTransformer(
-					new StreamSource(new File(schemaFile)));
-		} catch (TransformerConfigurationException e) {
-			e.printStackTrace();
-		}  
-
+	public XSLT (String schemaFile) throws SaxonApiException {
+		epicSAXProcessor = new Processor(false); 
+		xsltTransformer = epicSAXProcessor.newXsltCompiler().compile(new StreamSource(new File(schemaFile))).load();
+		
 	}
 	
-	public void clean ( InputStream input, OutputStream output ) throws IOException {
-		TagNode cleaned = _cleaner.clean(input);
-		_serializer.writeToStream(cleaned, output);
-	}
-	
-	public void tr (InputStream input, StreamResult output) throws IOException {
+	public void transform (InputStream input, OutputStream output) throws IOException, SaxonApiException {
+			XdmNode source;
+			source = epicSAXProcessor.newDocumentBuilder().build(new StreamSource(input));
+	        Serializer out = epicSAXProcessor.newSerializer(output);
+	        
+	        out.setOutputProperty(Serializer.Property.METHOD, "html");
+	        out.setOutputProperty(Serializer.Property.INDENT, "yes");
+	        
+	        xsltTransformer.setInitialContextNode(source);
+	        xsltTransformer.setDestination(out);
+	        xsltTransformer.transform();
 
-		Source inStream = new StreamSource(input);
-
-	   	try {
-			_transformer.transform(inStream, output);  
-	   	} catch (Exception e) {  
-	   		e.printStackTrace();  
-	   	}  
 	}
 }

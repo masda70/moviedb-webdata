@@ -17,30 +17,55 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 
+import javax.xml.transform.Source;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+
+import net.sf.saxon.s9api.DocumentBuilder;
+import net.sf.saxon.s9api.Processor;
+import net.sf.saxon.s9api.QName;
+import net.sf.saxon.s9api.SaxonApiException;
+import net.sf.saxon.s9api.WhitespaceStrippingPolicy;
+import net.sf.saxon.s9api.XPathCompiler;
+import net.sf.saxon.s9api.XPathSelector;
+import net.sf.saxon.s9api.XdmItem;
+import net.sf.saxon.s9api.XdmNode;
 
 import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.PrettyXmlSerializer;
 import org.htmlcleaner.TagNode;
+import org.xml.sax.InputSource;
 
 public class RTProcessor {
 	
-	private String userAgent;
 	private OutputStream out;
+	WebXMLExtractor web;
 	private XSLT xsltProcessor; 
-	public RTProcessor(String _userAgent, OutputStream _out){
-		userAgent = _userAgent;
-		out = _out;
-		xsltProcessor = new XSLT("schema/googlefirstresult.xslt");
-	}
-	public void processEntry(String movieTitle, String movieYear) throws Exception{
+    XPathSelector selector;
+    Processor epicSAXProcessor;
+	public RTProcessor( OutputStream _out){
+		try {
+			out = _out;
+			web = new WebXMLExtractor();
+			xsltProcessor = new XSLT("schema/googlefirstresult.xslt");
 
-	
+			epicSAXProcessor= new Processor(false);
+			XPathCompiler xpath = epicSAXProcessor.newXPathCompiler();
+
+			selector=  xpath.compile("//a/@href[starts-with(.,'http://www.rottentomatoes.com/m/')]").load();
+		} catch (SaxonApiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void processEntry(String fullTitle) throws Exception{
 		StringBuilder query = new StringBuilder();
 		query.append("https://www.google.com/search?as_q=%22");
 		try {
-			query.append(URLEncoder.encode(movieTitle+" ("+movieYear+")","UTF-8"));
+			query.append(URLEncoder.encode(fullTitle,"UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,36 +73,35 @@ public class RTProcessor {
 		query.append("%22&as_epq=&as_oq=&as_eq=&as_nlo=&as_nhi=&lr=&cr=&as_qdr=all&as_sitesearch=rottentomatoes.com&as_occt=any&safe=off&tbs=&as_filetype=&as_rights=&btnl=745");
 		
 		URL url = new URL(query.toString());
-		URLConnection conn = url.openConnection();
-		conn.setRequestProperty("User-Agent",userAgent);
 		
-		InputStream is = conn.getInputStream();
 		
-		ByteArrayOutputStream cleaned = new ByteArrayOutputStream();
-		
-		Processor processor = new Processor();
+		ByteArrayOutputStream is = web.getURL(url);
+	
 
-		Build the source document by calling newDocumentBuilder() to create a document builder, setting appropriate options, and then calling the build() method. This returns an XdmNode which can be supplied as the context item to the XPath expression.
+        DocumentBuilder builder = epicSAXProcessor.newDocumentBuilder();
+        builder.setLineNumbering(true);
+        builder.setWhitespaceStrippingPolicy(WhitespaceStrippingPolicy.ALL);
+        XdmNode booksDoc = builder.build(new StreamSource(new ByteArrayInputStream(is.toByteArray())));
 
-		Call newXPathCompiler() to create an XPath Compiler, and set any options that are local to a specific compilation (notably declaring namespace prefixes that are used in the XPath expression).
+            selector.setContextItem(booksDoc);
 
-		Call the compile() method to compile an expression. The result is an XPathExecutable, which can be used as often as you like in the same thread or in different threads.
-
-		To evaluate the expression, call the load() method on the XPathExecutable. This creates an XPathSelector. The XPathSelector can be serially reused, but it must not be shared across multiple threads. Set any options required for the specific XPath execution (for example, the initial context node, the values of any variables referenced in the expression), and then call one of the methods iterator()evaluate(), or evaluateSingle() to execute the XPath expression.
-
-		Because the XPathSelector is an Iterable, it is possible to iterate over the results directly using the Java 5 "for-each" construct.
-
-		The result of an XPath expression is in general an XdmValue, representing a value as defined in the XDM data model (that is, a sequence of nodes and/or atomic values). Subclasses of XdmValue include XdmItem, XdmNode, and XdmAtomicValue, and these relate directly to the corresponding concepts in XDM. Various methods are available to translate between this model and native Java data types.
-
-		Examples of the use of s9api to evaluate XPath expressions are included in the Saxon resources file, see module S9APIExamples.java.
-
+            for (XdmItem item: selector) {
+            	System.out.println(item.getStringValue());
+            	break;
+            }
+ 
 
 		
-		xsltProcessor.clean(is, cleaned);
+/*
 		is.close();
 		StreamResult result = new StreamResult("result2.xml");
 		InputStream buffer = new ByteArrayInputStream(cleaned.toByteArray());	
-		xsltProcessor.tr(buffer,result);
+		xsltProcessor.tr(buffer,result);*/
+	}
+	public void processEntry(String movieTitle, String movieYear) throws Exception{
+		processEntry(movieTitle+" ("+movieYear+")");
+	
+
 	}
 	
 }

@@ -2,11 +2,12 @@ package org.moviedb;
 
 import java.io.*;
 import java.net.*;
-import javax.xml.transform.stream.StreamResult;
+
+import net.sf.saxon.s9api.SaxonApiException;
 
 public class Main {
 
-	static String userAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/A.B (KHTML, like Gecko) Chrome/X.Y.Z.W Safari/A.B.";
+	
 	
 	public static void testRT() throws IOException{
 		
@@ -16,10 +17,27 @@ public class Main {
 			
 			fos = new FileOutputStream(fileOut);
 			OutputStream out = new BufferedOutputStream(fos);
-			RTProcessor rt = new RTProcessor(userAgent,out);
-			
+			RTProcessor rt = new RTProcessor(out);
+
 			try {
-				rt.processEntry("Titanic", "1997");
+				BufferedReader movies = new BufferedReader(
+						new InputStreamReader(
+								new DataInputStream(
+										new FileInputStream("movies.txt")
+										)
+								)
+						);
+				
+				String movie, name;
+				
+				while ((movie = movies.readLine()) != null)   {
+					System.out.println(movie);
+					name = movie;
+					
+					rt.processEntry(name);
+				
+				}
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -29,9 +47,9 @@ public class Main {
 		}
 	}
 	
-	public static void testIMDB() throws IOException{
+	public static void testIMDB() throws IOException, SaxonApiException{
 		XSLT xslt = new XSLT("schema/imdb.xslt");
-		
+		WebXMLExtractor web = new WebXMLExtractor();
 
 		BufferedReader movies = new BufferedReader(
 				new InputStreamReader(
@@ -46,33 +64,31 @@ public class Main {
 		while ((movie = movies.readLine()) != null)   {
 			System.out.println(movie);
 			name = URLEncoder.encode(movie, "UTF-8");
-			
-			ByteArrayOutputStream cleaned = new ByteArrayOutputStream();
-			StreamResult result = new StreamResult("xml/"+name+".xml");
+		
+			OutputStream result = new BufferedOutputStream(new FileOutputStream(new File("xml/"+name+".xml")));
 
-			// connect to imdb
+			// get imdb page
+
 			URL url = new URL("http://www.imdb.com/find?q=" + name);
-			URLConnection conn = url.openConnection();
-			conn.setRequestProperty("User-Agent", userAgent);
-			InputStream html = conn.getInputStream();
+		
+			InputStream buffer = new ByteArrayInputStream(web.getURL(url).toByteArray());
 			
-			// clean
-			xslt.clean(html, cleaned);
-			InputStream buffer = new ByteArrayInputStream(
-					cleaned.toByteArray());
-
 			// transform
 			System.out.println("transform...");
-			xslt.tr(buffer, result);
+			
+			xslt.transform(buffer, result);
 		}
 	}
 	
 	public static void main(String[] args) {
-
+		
 		try {
 			//testRT();
 			testIMDB();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SaxonApiException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
