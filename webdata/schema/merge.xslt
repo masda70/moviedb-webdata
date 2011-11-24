@@ -7,6 +7,6 @@
     </xsl:template>
 
     <xsl:template match="entry">
-        <xsl:copy-of select="document(concat('../data/movies/',.,'.xml'))" />
+        <xsl:copy-of select="document(concat('../data/movies/',.))" />
     </xsl:template>
 </xsl:stylesheet>
