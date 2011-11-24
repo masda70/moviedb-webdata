@@ -1,9 +1,5 @@
 package org.moviedb;
 
-import java.io.InputStream;
-
-import javax.xml.transform.stream.StreamSource;
-
 import net.sf.saxon.s9api.*;
 
 public class XPath {

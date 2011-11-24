@@ -9,7 +9,6 @@ import org.w3c.dom.Node;
 
 import net.sf.saxon.s9api.Destination;
 import net.sf.saxon.s9api.SaxonApiException;
-import net.sf.saxon.s9api.WhitespaceStrippingPolicy;
 import net.sf.saxon.s9api.XdmItem;
 
 public class RTProcessor {

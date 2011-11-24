@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -17,16 +16,9 @@ import javax.xml.transform.stream.StreamResult;
 import org.apache.xalan.xsltc.trax.SAX2DOM;
 import org.ccil.cowan.tagsoup.Parser;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.tidy.Tidy;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-
-
-
 
 
 
@@ -35,27 +27,6 @@ public class WebXMLExtractor {
 
 	
 	public WebXMLExtractor(){
-
-		/* builder = new SAXBuilder("org.ccil.cowan.tagsoup.Parser"); // build a JDOM tree from a SAX stream provided by tagsoup
-		 builder.setValidation(false);
-			 // reader = new Parser();
-		 outputter = new XMLOutputter();
-	*/
-
-
-		  // here we go - an DOM built from abitrary HTML
-
-		
-		/* _cleaner = new HtmlCleaner();
-		CleanerProperties props = _cleaner.getProperties();
-		props.setPruneTags("script,style");
-		props.setRecognizeUnicodeChars(false);
-		props.setAdvancedXmlEscape(false);
-	//	props.setOmitDoctypeDeclaration(false);
-		props.setTranslateSpecialEntities(true);
-		props.setTransResCharsToNCR(true);
-		props.setOmitComments(true);
-		_serializer= new PrettyHtmlSerializer(props);*/
 	}
 	
 	public void removeTag(Node node){

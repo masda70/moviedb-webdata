@@ -1,7 +1,5 @@
 package org.moviedb;
 
-import java.util.Set;
-
 import net.sf.saxon.s9api.Processor;
 
 public class SAXProcessor {

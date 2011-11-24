@@ -8,9 +8,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
-import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
@@ -201,7 +199,7 @@ public class Main {
 	
 	public void extractFromFile(String fileName)
 			throws FileNotFoundException, IOException, ClassNotFoundException{
-		extractFromFile(fileName, 0, 0);
+		extractFromFile(fileName, 1, 0);
 	}
 	
 	public void extractIMDBMovieList(String year, int pageFrom, int pageTo)
@@ -261,17 +259,14 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
-		
-		
 		try {
 			Main main = new Main();
-		//main.extractIMDBMovieList("1980",0,4);
-		//	main.extractFromFile("data/IMDB_y1960(0,9).object",251,400);
+			//main.extractIMDBMovieList("1980",0,4);
+			//main.extractFromFile("data/IMDB_y1960(0,9).object",251,400);
 			main.mergeFiles("data");
 		} catch ( Exception e ) {
 			e.printStackTrace();
 
 		}
-		
 	}
 }
