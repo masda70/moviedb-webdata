@@ -105,7 +105,7 @@ public class Main {
 			System.out.println("Extracting IMDB list, year "+ year +" pages from "+pageFrom+" to "+(pageTo-1)+".");
 			ArrayList<URL> list = movieExtractor.getList(year, pageFrom, pageTo);
 			String outputFile = "data/IMDB_y"+year+"("+pageFrom+","+(pageTo-1)+").object";
-			System.out.println("Done. Output at "+outputFile+".");
+			System.out.println("Done, extracted "+list.size()+" movie URLs. Output at "+outputFile+".");
 			ObjectOutputStream oos;
 
 			oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File(outputFile))));
