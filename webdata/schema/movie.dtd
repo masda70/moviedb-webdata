@@ -15,7 +15,7 @@
 <!ELEMENT actor (#PCDATA)>
 <!ELEMENT synopsis (#PCDATA)>
 <!ELEMENT review (reviewer, rating?, comment)>
-<!ELEMENT reviewer (url*,from?,name?,from?)>
+<!ELEMENT reviewer (url*,name?,from?)>
 <!ELEMENT url (#PCDATA)>
 <!ELEMENT from (#PCDATA)>
 <!ELEMENT rating (#PCDATA)>
