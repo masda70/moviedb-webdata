@@ -1,13 +1,8 @@
 package org.moviedb;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 
 import net.sf.saxon.s9api.Destination;
 import net.sf.saxon.s9api.SaxonApiException;
@@ -63,7 +58,7 @@ public class RTProcessor {
 	        System.out.print("XSLT parsing RT files...");
 			xslt_movie.transform(new ByteArrayInputStream(ms.toByteArray()),main);
 			xslt_review.transform(new ByteArrayInputStream(rs.toByteArray()),reviews);
-			System.out.println("done.");
+
 			ms.close();
 			rs.close();
 	        return true;

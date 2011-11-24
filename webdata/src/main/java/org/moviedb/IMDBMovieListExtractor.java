@@ -1,32 +1,16 @@
 package org.moviedb;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import javax.xml.transform.stream.StreamSource;
-
-import net.sf.saxon.s9api.DocumentBuilder;
-import net.sf.saxon.s9api.Processor;
-import net.sf.saxon.s9api.SaxonApiException;
-import net.sf.saxon.s9api.WhitespaceStrippingPolicy;
-import net.sf.saxon.s9api.XPathCompiler;
-import net.sf.saxon.s9api.XPathSelector;
-import net.sf.saxon.s9api.XdmItem;
-import net.sf.saxon.s9api.XdmNode;
+import net.sf.saxon.s9api.*;
 
 public class IMDBMovieListExtractor {
-
-
 	WebXMLExtractor web;
     XPath xpath;
-   
     
     private static final int IMDB_MOVIESPERPAGE = 50;
     
@@ -34,12 +18,11 @@ public class IMDBMovieListExtractor {
     private static final String imdbHOME = "http://www.imdb.com";
     
 	public IMDBMovieListExtractor(){
-			web = new WebXMLExtractor();
-			xpath = new XPath("//td[@class='title']/a/@href");
+		web = new WebXMLExtractor();
+		xpath = new XPath("//td[@class='title']/a/@href");
 	}
-	public ArrayList<URL> getList(String year, int pageFrom, int pageTo)
-	{
-		
+	
+	public ArrayList<URL> getList(String year, int pageFrom, int pageTo) {
 		ArrayList<URL> urlList = new ArrayList<URL>((pageTo-pageFrom+1)*IMDB_MOVIESPERPAGE);
 		for(int i=pageFrom; i<pageTo; i++ ){
 			int index = 1+i*IMDB_MOVIESPERPAGE;
@@ -71,16 +54,12 @@ public class IMDBMovieListExtractor {
 			        	urlList.add(new URL(imdbHOME+item.getStringValue()));
 			        }
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		
 		return urlList;
-
-	 
 	}
-
 }
