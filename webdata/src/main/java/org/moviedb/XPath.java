@@ -24,12 +24,9 @@ public class XPath {
 		return selector;
 	}
 	
-	public void select(InputStream is){		
+	public void select(XdmNode doc){		
 		try {
-			DocumentBuilder builder = SAXProcessor.getProcessor().newDocumentBuilder();
-	        builder.setLineNumbering(true);
-	        builder.setWhitespaceStrippingPolicy(WhitespaceStrippingPolicy.ALL);
-			XdmNode doc = builder.build(new StreamSource(is));
+
 			
 			selector.setContextItem(doc);
 		} catch (SaxonApiException e) {

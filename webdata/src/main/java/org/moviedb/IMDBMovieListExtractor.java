@@ -6,6 +6,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import org.w3c.dom.Node;
+
 import net.sf.saxon.s9api.*;
 
 public class IMDBMovieListExtractor {
@@ -16,8 +18,9 @@ public class IMDBMovieListExtractor {
     
     private static final int MAXNUMBEROFGETURLATTEMPTS= 5;
     private static final String imdbHOME = "http://www.imdb.com";
-    
-	public IMDBMovieListExtractor(){
+	private  net.sf.saxon.s9api.DocumentBuilder saxDocBuilder;
+	public IMDBMovieListExtractor(	net.sf.saxon.s9api.DocumentBuilder _saxDocBuilder){
+	 	saxDocBuilder =  _saxDocBuilder;
 		web = new WebXMLExtractor();
 		xpath = new XPath("//td[@class='title']/a/@href");
 	}
@@ -30,13 +33,13 @@ public class IMDBMovieListExtractor {
 				URL url;
 
 				url = new URL(imdbHOME+"/search/title?sort=moviemeter,asc&start="+index+"&title_type=feature&year="+URLEncoder.encode(year,"UTF-8")+","+URLEncoder.encode(year,"UTF-8"));
-				ByteArrayOutputStream is;
+				Node is;
 					is = null;
 					int attempt = 0;
 					while(true){
 						IOException err = null;
 						try {
-							is = web.getURL(url);
+							is = web.getNode(url);
 						} catch (IOException e) {
 							err = e;
 						}
@@ -48,7 +51,7 @@ public class IMDBMovieListExtractor {
 						}
 					}
 
-					xpath.select(new ByteArrayInputStream(is.toByteArray()));
+					xpath.select(saxDocBuilder.wrap(is));
 			
 			        for (XdmItem item: xpath.getSelector()) {
 			        	urlList.add(new URL(imdbHOME+item.getStringValue()));

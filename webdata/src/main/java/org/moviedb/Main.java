@@ -32,16 +32,16 @@ public class Main {
 		_xpath_year = new XPath("movie/year/text()");
 		
 		_web = new WebXMLExtractor();
-		
-		_rt = new RTProcessor();
+		_saxDocBuilder =  SAXProcessor.getProcessor().newDocumentBuilder();
+		_saxDocBuilder.setLineNumbering(true);
+		_saxDocBuilder.setWhitespaceStrippingPolicy(WhitespaceStrippingPolicy.ALL);
+		_rt = new RTProcessor(_saxDocBuilder);
 
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		docFactory.setIgnoringElementContentWhitespace(true);
 		_docBuilder = docFactory.newDocumentBuilder();
 
-		_saxDocBuilder =  SAXProcessor.getProcessor().newDocumentBuilder();
-		_saxDocBuilder.setLineNumbering(true);
-		_saxDocBuilder.setWhitespaceStrippingPolicy(WhitespaceStrippingPolicy.ALL);
+
 		
 
 		_fileListDoc = _docBuilder.newDocument();
@@ -77,13 +77,14 @@ public class Main {
 		title = title.substring(7, title.length()-1);
 	
 		System.out.print("#"+count+": Querying "+movieURL+"...");
-		ByteArrayOutputStream ms= _web.getURL(movieURL);
+		Node ms= _web.getNode(movieURL);
 		System.out.println("done downloading.");
 	
+		
 		System.out.print("XSLT parsing file...");
-		_xslt_movie.transform(new ByteArrayInputStream(ms.toByteArray()),dest);
+		_xslt_movie.transform(_saxDocBuilder.wrap(ms),dest);
 		System.out.println("done.");
-		ms.close();
+
 
 		XdmNode imdb_movieXdm = _saxDocBuilder.wrap(imdb_movie);
 		_xpath_title.getSelector().setContextItem(imdb_movieXdm );
@@ -108,12 +109,12 @@ public class Main {
 		URL reviewURL = new URL(movieURL+"reviews");
     
 		System.out.print("Downloading IMDB reviews ...");
-		ByteArrayOutputStream rs= _web.getURL(reviewURL);
+		Node rs= _web.getNode(reviewURL);
 		System.out.println("done.");
 
 	
 		System.out.print("XSLT parsing file...");
-		_xslt_review.transform(new ByteArrayInputStream(rs.toByteArray()),dest);
+		_xslt_review.transform(_saxDocBuilder.wrap(rs),dest);
 		System.out.println("done.");
 	
 		String outputFile = "data/movies/"+title+".xml";
@@ -208,7 +209,7 @@ public class Main {
 	
 	public void extractIMDBMovieList(String year, int pageFrom, int pageTo)
 			throws FileNotFoundException, IOException {
-		IMDBMovieListExtractor movieExtractor= new IMDBMovieListExtractor();
+		IMDBMovieListExtractor movieExtractor= new IMDBMovieListExtractor(_saxDocBuilder);
 
 		System.out.println("Extracting IMDB list, year "+ year +" pages from "+pageFrom+" to "+(pageTo-1)+".");
 		ArrayList<URL> list = movieExtractor.getList(year, pageFrom, pageTo);

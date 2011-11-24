@@ -6,33 +6,164 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.htmlcleaner.CleanerProperties;
-import org.htmlcleaner.HtmlCleaner;
-import org.htmlcleaner.PrettyXmlSerializer;
-import org.htmlcleaner.TagNode;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.apache.xalan.xsltc.trax.SAX2DOM;
+import org.ccil.cowan.tagsoup.Parser;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.tidy.Tidy;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+
+
+
+
+
 
 public class WebXMLExtractor {
 	static String userAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/A.B (KHTML, like Gecko) Chrome/X.Y.Z.W Safari/A.B.";
-	private HtmlCleaner _cleaner;
-	private PrettyXmlSerializer _serializer;
+
 	
 	public WebXMLExtractor(){
-		 _cleaner = new HtmlCleaner();
+
+		/* builder = new SAXBuilder("org.ccil.cowan.tagsoup.Parser"); // build a JDOM tree from a SAX stream provided by tagsoup
+		 builder.setValidation(false);
+			 // reader = new Parser();
+		 outputter = new XMLOutputter();
+	*/
+
+
+		  // here we go - an DOM built from abitrary HTML
+
+		
+		/* _cleaner = new HtmlCleaner();
 		CleanerProperties props = _cleaner.getProperties();
 		props.setPruneTags("script,style");
 		props.setRecognizeUnicodeChars(false);
 		props.setAdvancedXmlEscape(false);
-		_serializer= new PrettyXmlSerializer(props);
+	//	props.setOmitDoctypeDeclaration(false);
+		props.setTranslateSpecialEntities(true);
+		props.setTransResCharsToNCR(true);
+		props.setOmitComments(true);
+		_serializer= new PrettyHtmlSerializer(props);*/
+	}
+	
+	public void removeTag(Node node){
+		NodeList list = node.getChildNodes();
+		boolean b = false;
+		for(int i=0; i< list.getLength();i++){
+			Node r = list.item(i);
+			if(r.getNodeName()=="script" || r.getNodeName()=="style" || r.getNodeName()=="meta" || r.getNodeName()=="noscript"){
+				node.removeChild(r);
+				b = true;			
+				break;
+			}else{
+				removeTag(r);
+			}
+		}
+		if(b)removeTag(node);
+		
+	}
+	
+	
+	public Node getNode(URL url) throws IOException{
+	    
+
+
+        URLConnection conn = url.openConnection();
+		conn.setRequestProperty("User-Agent", userAgent);
+		InputStream input = conn.getInputStream();
+
+		final Parser parser = new Parser();
+		SAX2DOM sax2dom = null;
+		try {
+			sax2dom = new SAX2DOM();
+
+			parser.setContentHandler(sax2dom);
+			parser.setFeature(Parser.namespacesFeature, false);
+			parser.parse(new InputSource(input));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Node document = sax2dom.getDOM();
+		
+		return document;
+	
+
+
+		
+
+		
+
+		 
+		
 	}
 	
 	public ByteArrayOutputStream getURL(URL url) throws IOException{
+    
 
-		URLConnection conn = url.openConnection();
-		conn.setRequestProperty("User-Agent", userAgent);
-		InputStream input = conn.getInputStream();
-		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		TagNode cleaned = _cleaner.clean(input);
-		_serializer.writeToStream(cleaned, output);
-		return output;
+
+        try {
+				URLConnection conn = url.openConnection();
+				conn.setRequestProperty("User-Agent", userAgent);
+				InputStream input = conn.getInputStream();
+			
+				final Parser parser = new Parser();
+				SAX2DOM sax2dom = null;
+				try {
+					sax2dom = new SAX2DOM();
+
+					parser.setContentHandler(sax2dom);
+					parser.setFeature(Parser.namespacesFeature, false);
+					parser.parse(new InputSource(input));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				Node document = sax2dom.getDOM();
+				
+				removeTag(document);
+
+		        ByteArrayOutputStream output = new ByteArrayOutputStream();
+		        
+		        Result result = new StreamResult(output);
+
+		        // Write the DOM document to the file
+		        Transformer xformer = TransformerFactory.newInstance().newTransformer();
+		        xformer.transform(new DOMSource(document), result);
+		        
+				//outputter.output(doc, output);
+		        
+			/*	Document doc = builder.build(input);
+		
+				
+				
+				  ByteArrayOutputStream output = new ByteArrayOutputStream();
+				outputter.output(doc, output);
+				*/
+			  return output;
+
+				} catch (TransformerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			return null;
+
+
+		
+
+		
+
+		 
+		
 	}
 }

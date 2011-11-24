@@ -3,9 +3,13 @@ package org.moviedb;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
+
+import org.w3c.dom.Node;
 
 import net.sf.saxon.s9api.Destination;
 import net.sf.saxon.s9api.SaxonApiException;
+import net.sf.saxon.s9api.WhitespaceStrippingPolicy;
 import net.sf.saxon.s9api.XdmItem;
 
 public class RTProcessor {
@@ -15,8 +19,9 @@ public class RTProcessor {
   
 	private XSLT xslt_movie;
 	private XSLT xslt_review;
-    
-	public RTProcessor(){
+	private  net.sf.saxon.s9api.DocumentBuilder saxDocBuilder;
+	public RTProcessor(	net.sf.saxon.s9api.DocumentBuilder _saxDocBuilder){
+		saxDocBuilder = _saxDocBuilder;
 		web = new WebXMLExtractor();
 		xpath = new XPath("//a/@href[starts-with(.,'http://www.rottentomatoes.com/m/')]");
 		xslt_movie = new XSLT("schema/rt.xslt");
@@ -30,16 +35,21 @@ public class RTProcessor {
 			
 			StringBuilder query = new StringBuilder();
 			query.append("https://www.google.com/search?as_q=%22");
-			query.append(fullTitle);
+			try {
+				query.append(URLEncoder.encode(fullTitle,"UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			query.append("%22&as_epq=&as_oq=&as_eq=&as_nlo=&as_nhi=&lr=&cr=&as_qdr=all&as_sitesearch=rottentomatoes.com&as_occt=any&safe=off&tbs=&as_filetype=&as_rights=&btnl=745");
 			
 			URL url;
 	
 			url = new URL(query.toString());
 			System.out.println("Querying google for this title...");
-			ByteArrayOutputStream is = web.getURL(url);
+			Node is = web.getNode(url);
 		
-	        xpath.select(new ByteArrayInputStream(is.toByteArray()));
+	        xpath.select(saxDocBuilder.wrap(is));
 	
 	        String rt_url =null;
 	        for (XdmItem item: xpath.getSelector()) {
@@ -52,15 +62,13 @@ public class RTProcessor {
 	        URL rt_review = new URL(rt_url+"/reviews");
 	        
 	        System.out.print("Found "+fullTitle+" on RT.com, at "+rt_url+", downloading files...");
-	        ByteArrayOutputStream ms = web.getURL(rt_movie);
-	        ByteArrayOutputStream rs = web.getURL(rt_review);
+	        Node ms = web.getNode(rt_movie);
+	        Node rs = web.getNode(rt_review);
 	        System.out.println("done.");
 	        System.out.print("XSLT parsing RT files...");
-			xslt_movie.transform(new ByteArrayInputStream(ms.toByteArray()),main);
-			xslt_review.transform(new ByteArrayInputStream(rs.toByteArray()),reviews);
+			xslt_movie.transform(saxDocBuilder.wrap(ms),main);
+			xslt_review.transform(saxDocBuilder.wrap(rs),reviews);
 
-			ms.close();
-			rs.close();
 	        return true;
 		} catch (MalformedURLException e) {
 	

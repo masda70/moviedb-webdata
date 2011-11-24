@@ -24,6 +24,7 @@ public class XSLT {
 		try {
 			xsltTransformer = SAXProcessor.getProcessor().newXsltCompiler().compile(new StreamSource(new File(schemaFile))).load();
 			xsltTransformer.setSchemaValidationMode(ValidationMode.LAX);
+			
 		} catch (SaxonApiException e) {
 			e.printStackTrace();
 		}		
