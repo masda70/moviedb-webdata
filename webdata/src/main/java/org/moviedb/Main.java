@@ -26,7 +26,7 @@ import net.sf.saxon.s9api.XdmNode;
 public class Main {
 
 		
-	public static void extractMovies(ArrayList<URL> moviesURL){
+	public static void extractMovies(ArrayList<URL> moviesURL, int startAt){
 		try{
 		XSLT xslt_movie = new XSLT("schema/imdb.xslt");
 		XSLT xslt_review = new XSLT("schema/imdb_review.xslt");
@@ -41,8 +41,12 @@ public class Main {
 		net.sf.saxon.s9api.DocumentBuilder saxDocBuilder =  SAXProcessor.getProcessor().newDocumentBuilder();
 		 saxDocBuilder.setLineNumbering(true);
 		 saxDocBuilder.setWhitespaceStrippingPolicy(WhitespaceStrippingPolicy.ALL);
+		 int count = 0;
+		 boolean b = true;
 		for(URL movieURL: moviesURL){
-
+			count++;
+			if(b && startAt != count) continue; else b = false;
+				
 			try {
 				Document imdb_movie = docBuilder.newDocument();
 		        DOMDestination dest = new DOMDestination(imdb_movie);
@@ -51,7 +55,7 @@ public class Main {
 				title = title.substring(6, title.length()-1);
 
 				
-				System.out.print("Querying "+movieURL+"...");
+				System.out.print("#"+count+": Querying "+movieURL+"...");
 				ByteArrayOutputStream ms= web.getURL(movieURL);
 				System.out.println("done downloading.");
 				
@@ -141,6 +145,7 @@ public class Main {
 				s.serializeNode(saxDocBuilder.wrap(root));
 				
 				System.out.println("Output written on "+outputFile+" for movie "+original_title+"("+year+")");
+				System.out.println("-------------");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -158,12 +163,14 @@ public class Main {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static void extractFromFile(String fileName){
+	public static void extractFromFile(String fileName,int startAt){
 		try {
+			System.out.print("Processing list of movies at "+fileName+" starting from #"+startAt+".");
 			ObjectInputStream ios;
 			ios = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(fileName))));
 			ArrayList<URL> readObject = (ArrayList<URL>)ios.readObject();
-			extractMovies(readObject);
+			extractMovies(readObject,startAt);
+			System.out.print("Done processing list of movies at "+fileName+".");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -203,7 +210,7 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
-		extractFromFile("data/IMDB_y1960(0,9).object");
+		extractFromFile("data/IMDB_y1960(0,9).object",5);
 	}
 
 }
