@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!ELEMENT movies (movie*)>
-<!ELEMENT movie (original_title, alt_title*,imdb_rating, rt_rating, rt_meter, year, country+, director+, producer+, genre*, synopsis*, actor*,review*)>
+<!ELEMENT movie (original_title, alt_title*,imdb_rating, year, country+, director+, producer*, genre*, synopsis*, actor*,rt_rating?, rt_meter?, review*)>
 <!ELEMENT alt_title (#PCDATA)>
 <!ELEMENT original_title (#PCDATA)>
 <!ELEMENT imdb_rating (#PCDATA)>
@@ -8,15 +8,15 @@
 <!ELEMENT rt_meter (#PCDATA)>
 <!ELEMENT country (#PCDATA)>
 <!ELEMENT year (#PCDATA)>
-<!ELEMENT role (#PCDATA)>
 <!ELEMENT name (#PCDATA)>
-<!ELEMENT director (name)>
-<!ELEMENT producer (name)>
+<!ELEMENT director (#PCDATA)>
+<!ELEMENT producer (#PCDATA)>
 <!ELEMENT genre (#PCDATA)>
-<!ELEMENT actor (name, role)>
+<!ELEMENT actor (#PCDATA)>
 <!ELEMENT synopsis (#PCDATA)>
 <!ELEMENT review (reviewer, rating?, comment)>
-<!ELEMENT reviewer (url*,name?,from)>
+<!ELEMENT reviewer (url*,from?,name?,from?)>
 <!ELEMENT url (#PCDATA)>
+<!ELEMENT from (#PCDATA)>
 <!ELEMENT rating (#PCDATA)>
 <!ELEMENT comment (#PCDATA)>
