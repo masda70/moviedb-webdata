@@ -70,7 +70,8 @@ public class RTProcessor {
 
 	}
 	
-	public boolean processEntry(String movieTitle, String movieYear,Destination main, Destination reviews) throws IOException, SaxonApiException  {
+	public boolean processEntry(String movieTitle, String movieYear,Destination main, Destination reviews)
+			throws IOException, SaxonApiException  {
 		return processEntry(movieTitle+" ("+movieYear+")",main,reviews);
 	}
 	

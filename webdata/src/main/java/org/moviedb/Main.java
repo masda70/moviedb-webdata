@@ -57,16 +57,14 @@ public class Main {
 			count++;
 			if(isInit && startAt != count) continue;
 			else isInit = false;
-
-			System.out.println(stopAt != 0 && count > stopAt);
 			if(stopAt != 0 && count > stopAt) return;
 		
 			try {
 				processUrl(movieURL, count);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} catch (SaxonApiException e1) {
-				e1.printStackTrace();
+			} catch (IOException ex) {
+				System.out.println("ERROR "+ex.getMessage());
+			} catch (SaxonApiException ex) {
+				System.out.println("ERROR "+ex.getMessage());
 			}
 		}
 	}
@@ -76,8 +74,7 @@ public class Main {
 		Document imdb_movie = _docBuilder.newDocument();
 		DOMDestination dest = new DOMDestination(imdb_movie);
 		String title = movieURL.getPath();
-	
-		title = title.substring(6, title.length()-1);
+		title = title.substring(7, title.length()-1);
 	
 		System.out.print("#"+count+": Querying "+movieURL+"...");
 		ByteArrayOutputStream ms= _web.getURL(movieURL);
@@ -130,7 +127,7 @@ public class Main {
 		System.out.println("Output written on "+outputFile+" for movie "+original_title+"("+year+")");
 		System.out.println("-------------");
 	
-		addToFileList(outputFile);
+		addToFileList(title);
 	}
 
 	private Element mergeImdbRtResults ( Document imdb_movie, Document imdb_reviews, String original_title, String year )
@@ -141,8 +138,17 @@ public class Main {
 		
 		Element root = doc.createElement("movie");
 		
-		boolean ok = _rt.processEntry(original_title, year,
-				new DOMDestination(rt_movie), new DOMDestination(rt_reviews));
+		boolean ok;
+		try {
+			ok = _rt.processEntry(original_title, year,
+					new DOMDestination(rt_movie), new DOMDestination(rt_reviews));
+		} catch ( IOException e ) {
+			ok = false;
+			System.out.println("ERROR "+e.getMessage());
+		} catch ( SaxonApiException e ) {
+			ok = false;
+			System.out.println("ERROR "+e.getMessage());
+		}
 		
 		if( ok ) {
 			NodeList nl = imdb_movie.getFirstChild().getChildNodes();
@@ -200,7 +206,6 @@ public class Main {
 		extractFromFile(fileName, 0, 0);
 	}
 	
-	
 	public void extractIMDBMovieList(String year, int pageFrom, int pageTo)
 			throws FileNotFoundException, IOException {
 		IMDBMovieListExtractor movieExtractor= new IMDBMovieListExtractor();
@@ -216,12 +221,21 @@ public class Main {
 		oos.writeObject(list);
 		oos.close();
 	}
+
+	public void createFileList ( String output )
+			throws FileNotFoundException, IllegalArgumentException, SaxonApiException {
+		String outputFile = "data/"+output+".xml";
+		OutputStream out = new BufferedOutputStream(new FileOutputStream(new File(outputFile)));
+		Serializer s = SAXProcessor.getProcessor().newSerializer(out);
+	
+		s.serializeNode(_saxDocBuilder.wrap(_fileListRoot));
+	}
 	
 	public static void main(String[] args) {
 		try {
 			Main main = new Main();
 			main.extractFromFile("data/IMDB_y1960(0,9).object",1,5);
-
+			main.createFileList("file_list");
 		} catch ( FileNotFoundException e ) {
 			e.printStackTrace();
 		} catch ( IOException e ) {
@@ -229,6 +243,10 @@ public class Main {
 		} catch ( ClassNotFoundException e ) {
 			e.printStackTrace();
 		} catch ( ParserConfigurationException e ) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (SaxonApiException e) {
 			e.printStackTrace();
 		}
 	}
