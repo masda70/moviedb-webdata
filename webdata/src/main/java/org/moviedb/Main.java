@@ -48,60 +48,54 @@ public class Main {
 		}
 	}
 	
-	public static void testIMDB() throws IOException, SaxonApiException{
-		XSLT xslt = new XSLT("schema/imdb.xslt");
+	public static void IMDBparseMovies(ArrayList<URL> moviesURL) throws IOException, SaxonApiException{
+		XSLT xslt_movie = new XSLT("schema/imdb.xslt");
+		XSLT xslt_review = new XSLT("schema/imdb_review.xslt");
 		WebXMLExtractor web = new WebXMLExtractor();
 
-		BufferedReader movies = new BufferedReader(
-				new InputStreamReader(
-						new DataInputStream(
-								new FileInputStream("movies.txt")
-								)
-						)
-				);
-		
-		String movie, name;
-		  
-		while ((movie = movies.readLine()) != null)   {
-			System.out.println(movie);
-			name = URLEncoder.encode(movie, "UTF-8");
-		
-			OutputStream result = new BufferedOutputStream(new FileOutputStream(new File("xml/"+name+".xml")));
-
-			// get imdb page
-
-			URL url = new URL("http://www.imdb.com/find?q=" + name);
-		
-			InputStream buffer = new ByteArrayInputStream(web.getURL(url).toByteArray());
+		for(URL movieURL: moviesURL){
+			String title = movieURL.getPath();
 			
-			// transform
-			System.out.println("transform...");
+			title = title.substring(6, title.length()-1);
+			OutputStream movie = new BufferedOutputStream(new FileOutputStream(new File("data/imdb/"+title+".xml")));
+			xslt_movie.transform(new ByteArrayInputStream(web.getURL(movieURL).toByteArray()), movie);
+			URL reviewURL = new URL(movieURL+"reviews");
+
+			OutputStream review = new BufferedOutputStream(new FileOutputStream(new File("data/imdb/"+title+"_review.xml")));
+			xslt_review.transform(new ByteArrayInputStream(web.getURL(reviewURL).toByteArray()), review);
 			
-			xslt.transform(buffer, result);
 		}
 	}
 	
-	public static void main(String[] args) {
-		/*
+	@SuppressWarnings("unchecked")
+	public static void IMDBparseMoviesFromFile(String fileName){
 		try {
-			testRT();
-			testIMDB();
-			
-			
+			ObjectInputStream ios;
+			ios = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(fileName))));
+			ArrayList<URL> readObject = (ArrayList<URL>)ios.readObject();
+			IMDBparseMovies(readObject);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SaxonApiException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-*/
-		try {
+	
 		
-				IMDBMovieListExtractor movieExtractor= new IMDBMovieListExtractor();
-			String year = "1960";
-			int pageFrom = 0;
-			int pageTo = 10;
+	}
+	
+	
+	public void extractIMDBMovieList(String year, int pageFrom, int pageTo){
+		try {
+			IMDBMovieListExtractor movieExtractor= new IMDBMovieListExtractor();
+
 			System.out.println("Extracting IMDB list, year "+ year +" pages from "+pageFrom+" to "+(pageTo-1)+".");
 			ArrayList<URL> list = movieExtractor.getList(year, pageFrom, pageTo);
 			String outputFile = "data/IMDB_y"+year+"("+pageFrom+","+(pageTo-1)+").object";
@@ -119,6 +113,10 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) {
+		IMDBparseMoviesFromFile("data/IMDB_y1960(0,9).object");
 	}
 
 }
