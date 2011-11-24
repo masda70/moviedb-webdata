@@ -29,8 +29,7 @@ public class Main {
 	private RTProcessor _rt;
 	private DocumentBuilder _docBuilder;
 	private net.sf.saxon.s9api.DocumentBuilder _saxDocBuilder;
-	private Document _fileListDoc;
-	private Element _fileListRoot;
+
 
 	public Main () throws ParserConfigurationException {
 
@@ -50,8 +49,6 @@ public class Main {
 		docFactory.setIgnoringElementContentWhitespace(true);
 		_docBuilder = docFactory.newDocumentBuilder();
 
-		_fileListDoc = _docBuilder.newDocument();
-		_fileListRoot = _fileListDoc.createElement("list");
 	}
 	
 	public void extractMovies(ArrayList<URL> moviesURL, int startAt, int stopAt){
@@ -133,7 +130,7 @@ public class Main {
 		System.out.println("Output written on "+outputFile+" for movie "+original_title+"("+year+")");
 		System.out.println("-------------");
 	
-		addToFileList(title);
+
 	}
 
 	private Element mergeImdbRtResults ( Document imdb_movie, Document imdb_reviews, String original_title, String year )
@@ -187,16 +184,11 @@ public class Main {
 		return root;
 	}
 
-	private void addToFileList(String outputFile) {
-		Element item = _fileListDoc.createElement("entry");
-		item.appendChild(_fileListDoc.createTextNode(outputFile));
-		_fileListRoot.appendChild(item);		
-	}
 	
 	@SuppressWarnings("unchecked")
 	public void extractFromFile(String fileName, int startAt, int stopAt)
 			throws FileNotFoundException, IOException, ClassNotFoundException {
-		System.out.print("Processing list of movies at "+fileName+" starting from #"+startAt+".");
+		System.out.println("Processing list of movies at "+fileName+" starting from #"+startAt+".");
 		ObjectInputStream ios;
 		ios = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(fileName))));
 		
@@ -230,6 +222,29 @@ public class Main {
 
 	public void mergeFiles(String output)
 			throws IllegalArgumentException, IOException, SaxonApiException, TransformerFactoryConfigurationError, TransformerException {
+		
+		Document doc = _docBuilder.newDocument();
+		Element root = doc.createElement("list");
+		
+		File dir = new File("data/movies");
+		FilenameFilter filter = new FilenameFilter() {
+		    public boolean accept(File dir, String name) {
+		        return name.endsWith(".xml") && name.startsWith("tt");
+		    }
+		};
+		String[] children = dir.list(filter);
+		
+		if (children == null) {
+		    // Either dir does not exist or is not a directory
+		} else {
+		    for (int i=0; i<children.length; i++) {
+		        // Get filename of file or directory
+				Element item = doc.createElement("entry");
+				item.appendChild(doc.createTextNode(children[i]));
+				root.appendChild(item);
+		  }
+		}		
+		
 
 		XSLT xslt_merge = new XSLT("schema/merge.xslt");
 		String outputFile = "data/"+output+".xml";
@@ -240,18 +255,23 @@ public class Main {
         File file = new File(outputFile);
         Result result = new StreamResult(file);
 
-		xslt_merge.transform(_saxDocBuilder.wrap(_fileListRoot), dest);
+		xslt_merge.transform(_saxDocBuilder.wrap(root), dest);
         Transformer xformer = TransformerFactory.newInstance().newTransformer();
         xformer.transform(new DOMSource(merged), result);		
 	}
 	
 	public static void main(String[] args) {
+		
+		
 		try {
 			Main main = new Main();
-			main.extractFromFile("data/IMDB_y1960(0,9).object",1,5);
+		//main.extractIMDBMovieList("1980",0,4);
+		//	main.extractFromFile("data/IMDB_y1960(0,9).object",251,400);
 			main.mergeFiles("data");
 		} catch ( Exception e ) {
 			e.printStackTrace();
+
 		}
+		
 	}
 }
