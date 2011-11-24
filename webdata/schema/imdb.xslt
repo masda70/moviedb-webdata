@@ -5,8 +5,9 @@
 		<original_title>
 			<xsl:value-of select="//h1[@itemprop='name']/text()"/>
 		</original_title>
-    	<review>
-    	</review>
+		<original_title>
+			<xsl:value-of select="//span[@itemprop='ratingValue']"/>
+		</original_title>
 		<year>
 			<xsl:value-of select="//h1[@itemprop='name']/span/a"/>
 		</year>
