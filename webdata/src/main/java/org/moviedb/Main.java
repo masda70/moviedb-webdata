@@ -125,12 +125,12 @@ public class Main {
 				}
 				else
 				{
-					NodeList nl = rt_movie.getFirstChild().getChildNodes();
+					NodeList nl = imdb_movie.getFirstChild().getChildNodes();
 					for(int i=0; i < nl.getLength(); i++)
 					{
 						root.appendChild(doc.importNode(nl.item(i), true));
 					}
-					nl = rt_reviews.getFirstChild().getChildNodes();
+					nl = imdb_reviews.getFirstChild().getChildNodes();
 					for(int i=0; i < nl.getLength(); i++)
 					{
 						root.appendChild(doc.importNode(nl.item(i), true));
@@ -148,7 +148,7 @@ public class Main {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}		
-			break;
+
 
 
 		}		} catch (ParserConfigurationException e) {

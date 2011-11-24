@@ -35,12 +35,7 @@ public class RTProcessor {
 			
 			StringBuilder query = new StringBuilder();
 			query.append("https://www.google.com/search?as_q=%22");
-			try {
-				query.append(URLEncoder.encode(fullTitle,"UTF-8"));
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			query.append(fullTitle);
 			query.append("%22&as_epq=&as_oq=&as_eq=&as_nlo=&as_nhi=&lr=&cr=&as_qdr=all&as_sitesearch=rottentomatoes.com&as_occt=any&safe=off&tbs=&as_filetype=&as_rights=&btnl=745");
 			
 			URL url;
