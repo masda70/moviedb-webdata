@@ -25,25 +25,17 @@ public class IMDBMovieListExtractor {
 
 
 	WebXMLExtractor web;
-    XPathSelector selector;
-    Processor epicSAXProcessor;
+    XPath xpath;
+   
     
     private static final int IMDB_MOVIESPERPAGE = 50;
     
     private static final int MAXNUMBEROFGETURLATTEMPTS= 5;
     private static final String imdbHOME = "http://www.imdb.com";
+    
 	public IMDBMovieListExtractor(){
-		try {
 			web = new WebXMLExtractor();
-
-			epicSAXProcessor= new Processor(false);
-			XPathCompiler xpath = epicSAXProcessor.newXPathCompiler();
-
-			selector=  xpath.compile("//td[@class='title']/a/@href").load();
-		} catch (SaxonApiException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			xpath = new XPath("//td[@class='title']/a/@href");
 	}
 	public ArrayList<URL> getList(String year, int pageFrom, int pageTo)
 	{
@@ -73,23 +65,15 @@ public class IMDBMovieListExtractor {
 						}
 					}
 
-				   DocumentBuilder builder = epicSAXProcessor.newDocumentBuilder();
-				    builder.setLineNumbering(true);
-				    builder.setWhitespaceStrippingPolicy(WhitespaceStrippingPolicy.ALL);
-				    XdmNode booksDoc = builder.build(new StreamSource(new ByteArrayInputStream(is.toByteArray())));
-				
-			        selector.setContextItem(booksDoc);
-				
-			        for (XdmItem item: selector) {
+					xpath.select(new ByteArrayInputStream(is.toByteArray()));
+			
+			        for (XdmItem item: xpath.getSelector()) {
 			        	urlList.add(new URL(imdbHOME+item.getStringValue()));
 			        }
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SaxonApiException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
