@@ -50,8 +50,16 @@ public class Main {
 				
 				title = title.substring(6, title.length()-1);
 
-				xslt_movie.transform(new ByteArrayInputStream(web.getURL(movieURL).toByteArray()),dest);
-				System.out.println("Querying "+movieURL+"...");
+				
+				System.out.print("Querying "+movieURL+"...");
+				ByteArrayOutputStream ms= web.getURL(movieURL);
+				System.out.println("done downloading.");
+				
+				System.out.print("XSLT parsing file...");
+				xslt_movie.transform(new ByteArrayInputStream(ms.toByteArray()),dest);
+				System.out.println("done.");
+				ms.close();
+
 				XdmNode imdb_movieXdm = saxDocBuilder.wrap(imdb_movie);
 				xpath_title.getSelector().setContextItem(imdb_movieXdm );
 				
@@ -67,13 +75,21 @@ public class Main {
 		        	year = item.getStringValue();
 		        }
 				
+		        System.out.println("Found movie on IMDB: "+original_title+" ("+year+").");
 				
 				Document imdb_reviews = docBuilder.newDocument();
 		        dest = new DOMDestination(imdb_reviews);
 		        
-				URL reviewURL = new URL(movieURL+"reviews");
-
-				xslt_review.transform(new ByteArrayInputStream(web.getURL(reviewURL).toByteArray()),dest);
+		        URL reviewURL = new URL(movieURL+"reviews");
+		        
+				System.out.print("Downloading IMDB reviews ...");
+				ByteArrayOutputStream rs= web.getURL(reviewURL);
+				System.out.println("done.");
+	
+				
+				System.out.print("XSLT parsing file...");
+				xslt_review.transform(new ByteArrayInputStream(rs.toByteArray()),dest);
+				System.out.println("done.");
 				
 				String outputFile = "data/movies/"+title+".xml";
 				OutputStream out = new BufferedOutputStream(new FileOutputStream(new File(outputFile)));
@@ -132,7 +148,7 @@ public class Main {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}		
-			
+			break;
 
 
 		}		} catch (ParserConfigurationException e) {

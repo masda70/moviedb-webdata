@@ -16,7 +16,7 @@
 <!ELEMENT actor (name, role)>
 <!ELEMENT synopsis (#PCDATA)>
 <!ELEMENT review (reviewer, rating?, comment)>
-<!ELEMENT reviewer (source,name)>
-<!ELEMENT source (#PCDATA)>
+<!ELEMENT reviewer (url*,name?,from)>
+<!ELEMENT url (#PCDATA)>
 <!ELEMENT rating (#PCDATA)>
 <!ELEMENT comment (#PCDATA)>

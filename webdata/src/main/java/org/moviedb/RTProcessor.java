@@ -3,6 +3,7 @@ package org.moviedb;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -45,7 +46,7 @@ public class RTProcessor {
 			URL url;
 	
 			url = new URL(query.toString());
-				
+			System.out.println("Querying google for this title...");
 			ByteArrayOutputStream is = web.getURL(url);
 		
 	        xpath.select(new ByteArrayInputStream(is.toByteArray()));
@@ -60,9 +61,16 @@ public class RTProcessor {
 	        URL rt_movie = new URL(rt_url);
 	        URL rt_review = new URL(rt_url+"/reviews");
 	        
-	        System.out.println("Querying RT.com for "+fullTitle+"'");
-			xslt_movie.transform(new ByteArrayInputStream(web.getURL(rt_movie).toByteArray()),main);
-			xslt_review.transform(new ByteArrayInputStream(web.getURL(rt_review).toByteArray()),reviews);
+	        System.out.print("Found "+fullTitle+" on RT.com, at "+rt_url+", downloading files...");
+	        ByteArrayOutputStream ms = web.getURL(rt_movie);
+	        ByteArrayOutputStream rs = web.getURL(rt_review);
+	        System.out.println("done.");
+	        System.out.print("XSLT parsing RT files...");
+			xslt_movie.transform(new ByteArrayInputStream(ms.toByteArray()),main);
+			xslt_review.transform(new ByteArrayInputStream(rs.toByteArray()),reviews);
+			System.out.println("done.");
+			ms.close();
+			rs.close();
 	        return true;
 		} catch (MalformedURLException e) {
 	
