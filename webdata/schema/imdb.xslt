@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:transform version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template match="h1[@itemprop='name']">
+		<xsl:choose>
+		<xsl:when test="span[@class='title-extra'] != ''">
+				<original_title>
+					 <xsl:value-of select="span[@class='title-extra']/text()"></xsl:value-of>
+				 </original_title>
+				<alt_title>
+					 <xsl:value-of select="text()"></xsl:value-of>
+				</alt_title>
+		  </xsl:when>
+		  <xsl:otherwise>
+			  <original_title>
+					<xsl:value-of select="text()"></xsl:value-of>
+			 </original_title>
+		  </xsl:otherwise>
+		</xsl:choose>
+</xsl:template>
+
 <xsl:template match="/">
+
 	<movie>
-		<original_title>
-			<xsl:value-of select="//h1[@itemprop='name']/text()"/>
-		</original_title>
-		<original_title>
+		<xsl:apply-templates select="//h1[@itemprop='name']"></xsl:apply-templates>
+		<imdb_rating>
 			<xsl:value-of select="//span[@itemprop='ratingValue']"/>
-		</original_title>
+		</imdb_rating>
 		<year>
 			<xsl:value-of select="//h1[@itemprop='name']/span/a"/>
 		</year>
