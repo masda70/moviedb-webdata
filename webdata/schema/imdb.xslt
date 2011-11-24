@@ -3,47 +3,37 @@
 <xsl:template match="/">
 	<movie>
 		<original_title>
-			<xsl:value-of select="//title"/>
+			<xsl:value-of select="//h1[@itemprop='name']/text()"/>
 		</original_title>
-	    <xsl:for-each select="TODO">
-    		<alt_title>
-    			<xsl:value-of select="TODO"/>
-    		</alt_title>
-    	</xsl:for-each>
     	<review>
-			<xsl:value-of select="TODO"/>
     	</review>
 		<year>
-			<xsl:value-of select="//time[@itemprop='datePublished']"/>
+			<xsl:value-of select="//h1[@itemprop='name']/span/a"/>
 		</year>
-		<xsl:for-each select="TODO">
+		<xsl:for-each select="//h4[contains(., 'Country:')]/following-sibling::a">
     		<country>
-    			<xsl:value-of select="TODO"/>
+    			<xsl:value-of select="."/>
     		</country>
     	</xsl:for-each>
-		<xsl:for-each select="TODO">
-    		<director>
-    			<xsl:value-of select="TODO"/>
-    		</director>
-    	</xsl:for-each>
-		<xsl:for-each select="TODO">
+   		<director>
+			<xsl:value-of select="//a[@itemprop='director']"/>
+   		</director>
+		<xsl:for-each select="//h4[contains(., 'Production Co:')]/following-sibling::a">
     		<producer>
-    			<xsl:value-of select="TODO"/>
+    			<xsl:value-of select="."/>
     		</producer>
     	</xsl:for-each>
-		<xsl:for-each select="TODO">
+		<xsl:for-each select="//td[@id='overview-top']/div[@class='infobar']/a">
     		<genre>
-    			<xsl:value-of select="TODO"/>
+    			<xsl:value-of select="."/>
     		</genre>
     	</xsl:for-each>
-		<xsl:for-each select="TODO">
-    		<synopsis>
-    			<xsl:value-of select="TODO"/>
-    		</synopsis>
-    	</xsl:for-each>
-		<xsl:for-each select="TODO">
+		<synopsis>
+			<xsl:value-of select="//p[@itemprop='description']"/>
+		</synopsis>
+		<xsl:for-each select="//h4[contains(., 'Stars:')]/following-sibling::a">
     		<actor>
-    			<xsl:value-of select="TODO"/>
+    			<xsl:value-of select="."/>
     		</actor>
     	</xsl:for-each>
 	</movie>
