@@ -7,7 +7,14 @@ import java.io.OutputStream;
 
 import javax.xml.transform.stream.StreamSource;
 
-import net.sf.saxon.s9api.*;
+import net.sf.saxon.s9api.Destination;
+import net.sf.saxon.s9api.SaxonApiException;
+import net.sf.saxon.s9api.Serializer;
+import net.sf.saxon.s9api.ValidationMode;
+import net.sf.saxon.s9api.XdmDestination;
+import net.sf.saxon.s9api.XdmNode;
+import net.sf.saxon.s9api.XsltTransformer;
+
 
 
 public class XSLT {
@@ -16,6 +23,7 @@ public class XSLT {
 	public XSLT (String schemaFile) {
 		try {
 			xsltTransformer = SAXProcessor.getProcessor().newXsltCompiler().compile(new StreamSource(new File(schemaFile))).load();
+			xsltTransformer.setSchemaValidationMode(ValidationMode.LAX);
 		} catch (SaxonApiException e) {
 			e.printStackTrace();
 		}		
@@ -33,6 +41,15 @@ public class XSLT {
         xsltTransformer.transform();
 
 	}
+	
+	public void transform (XdmNode source, Destination dest) throws IOException, SaxonApiException {	
+	
+        xsltTransformer.setInitialContextNode(source);
+        xsltTransformer.setDestination(dest);
+        xsltTransformer.transform();
+
+	}
+	
 	
 	public void transform (InputStream input, Destination dest) throws IOException, SaxonApiException {
 		XdmNode source;
