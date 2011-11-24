@@ -133,7 +133,7 @@ public class Main {
 				e1.printStackTrace();
 			}		
 			
-			break;
+
 
 		}		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block

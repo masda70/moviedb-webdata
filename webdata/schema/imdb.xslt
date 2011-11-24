@@ -5,15 +5,15 @@
 		<xsl:choose>
 		<xsl:when test="span[@class='title-extra'] != ''">
 				<original_title>
-					 <xsl:value-of select="span[@class='title-extra']/text()"></xsl:value-of>
+					 <xsl:value-of select="normalize-space(span[@class='title-extra']/text())"></xsl:value-of>
 				 </original_title>
 				<alt_title>
-					 <xsl:value-of select="text()"></xsl:value-of>
+					 <xsl:value-of select="normalize-space(text())"></xsl:value-of>
 				</alt_title>
 		  </xsl:when>
 		  <xsl:otherwise>
 			  <original_title>
-					<xsl:value-of select="text()"></xsl:value-of>
+					<xsl:value-of select="normalize-space(text())"></xsl:value-of>
 			 </original_title>
 		  </xsl:otherwise>
 		</xsl:choose>
