@@ -7,6 +7,15 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.*;
 import net.sf.saxon.s9api.*;
@@ -41,12 +50,8 @@ public class Main {
 		docFactory.setIgnoringElementContentWhitespace(true);
 		_docBuilder = docFactory.newDocumentBuilder();
 
-
-		
-
 		_fileListDoc = _docBuilder.newDocument();
-		_fileListRoot = _fileListDoc.createElement("movies");
-
+		_fileListRoot = _fileListDoc.createElement("list");
 	}
 	
 	public void extractMovies(ArrayList<URL> moviesURL, int startAt, int stopAt){
@@ -183,7 +188,7 @@ public class Main {
 	}
 
 	private void addToFileList(String outputFile) {
-		Element item = _fileListDoc.createElement("item");
+		Element item = _fileListDoc.createElement("entry");
 		item.appendChild(_fileListDoc.createTextNode(outputFile));
 		_fileListRoot.appendChild(item);		
 	}
@@ -223,31 +228,29 @@ public class Main {
 		oos.close();
 	}
 
-	public void createFileList ( String output )
-			throws FileNotFoundException, IllegalArgumentException, SaxonApiException {
+	public void mergeFiles(String output)
+			throws IllegalArgumentException, IOException, SaxonApiException, TransformerFactoryConfigurationError, TransformerException {
+
+		XSLT xslt_merge = new XSLT("schema/merge.xslt");
 		String outputFile = "data/"+output+".xml";
-		OutputStream out = new BufferedOutputStream(new FileOutputStream(new File(outputFile)));
-		Serializer s = SAXProcessor.getProcessor().newSerializer(out);
-	
-		s.serializeNode(_saxDocBuilder.wrap(_fileListRoot));
+		
+		Document merged = _docBuilder.newDocument();
+		DOMDestination dest = new DOMDestination(merged);
+
+        File file = new File(outputFile);
+        Result result = new StreamResult(file);
+
+		xslt_merge.transform(_saxDocBuilder.wrap(_fileListRoot), dest);
+        Transformer xformer = TransformerFactory.newInstance().newTransformer();
+        xformer.transform(new DOMSource(merged), result);		
 	}
 	
 	public static void main(String[] args) {
 		try {
 			Main main = new Main();
 			main.extractFromFile("data/IMDB_y1960(0,9).object",1,5);
-			main.createFileList("file_list");
-		} catch ( FileNotFoundException e ) {
-			e.printStackTrace();
-		} catch ( IOException e ) {
-			e.printStackTrace();
-		} catch ( ClassNotFoundException e ) {
-			e.printStackTrace();
-		} catch ( ParserConfigurationException e ) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (SaxonApiException e) {
+			main.mergeFiles("data");
+		} catch ( Exception e ) {
 			e.printStackTrace();
 		}
 	}
