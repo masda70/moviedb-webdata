@@ -42,7 +42,7 @@
  			</xsl:variable>
 			<xsl:if test="$rating != ''">
  			<rating>
- 				<xsl:value-of select="replace($rating,' | Original Score: ','')" />
+ 				<xsl:value-of select="replace($rating,'.*Original Score: ','')" />
  			</rating>
  			</xsl:if>
 
