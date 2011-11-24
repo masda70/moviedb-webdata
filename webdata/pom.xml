@@ -40,5 +40,10 @@
     	<artifactId>saxonhe</artifactId>
     	<version>9.3</version>
     </dependency>
+    <dependency>
+    	<groupId>net.sf.jopt-simple</groupId>
+    	<artifactId>jopt-simple</artifactId>
+    	<version>4.2</version>
+    </dependency>
   </dependencies>
 </project>
