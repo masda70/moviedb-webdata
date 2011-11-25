@@ -19,6 +19,7 @@ public class IMDBMovieListExtractor {
     private static final int MAXNUMBEROFGETURLATTEMPTS= 5;
     private static final String imdbHOME = "http://www.imdb.com";
 	private  net.sf.saxon.s9api.DocumentBuilder saxDocBuilder;
+	
 	public IMDBMovieListExtractor(	net.sf.saxon.s9api.DocumentBuilder _saxDocBuilder){
 	 	saxDocBuilder =  _saxDocBuilder;
 		web = new WebXMLExtractor();
@@ -26,8 +27,15 @@ public class IMDBMovieListExtractor {
 	}
 	
 	public ArrayList<URL> getList(String year, int pageFrom, int pageTo) {
-		ArrayList<URL> urlList = new ArrayList<URL>((pageTo-pageFrom+1)*IMDB_MOVIESPERPAGE);
-		for(int i=pageFrom; i<pageTo; i++ ){
+		ArrayList<URL> urlList;
+		if(pageTo == -1){
+			urlList = new ArrayList<URL>();
+			pageTo = Integer.MAX_VALUE;
+		}else{
+			urlList = new ArrayList<URL>((pageTo-pageFrom+1)*IMDB_MOVIESPERPAGE);
+		}
+		
+		for(int i=pageFrom; i<=pageTo; i++ ){
 			int index = 1+i*IMDB_MOVIESPERPAGE;
 			try {
 				URL url;
@@ -52,7 +60,8 @@ public class IMDBMovieListExtractor {
 					}
 
 					xpath.select(saxDocBuilder.wrap(is));
-			
+					if(!(xpath.getSelector().iterator().hasNext())) break;
+					
 			        for (XdmItem item: xpath.getSelector()) {
 			        	urlList.add(new URL(imdbHOME+item.getStringValue()));
 			        }

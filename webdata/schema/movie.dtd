@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!ELEMENT movies (movie*)>
 <!ELEMENT movie (original_title, alt_title*,imdb_rating, year, country+, director+, producer*, genre*, synopsis*, actor*,rt_rating?, rt_meter?, review*)>
 <!ELEMENT alt_title (#PCDATA)>

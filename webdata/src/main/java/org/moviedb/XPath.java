@@ -8,7 +8,7 @@ public class XPath {
 	public XPath(String value){
 		try{
 			xpath = SAXProcessor.getProcessor().newXPathCompiler();
-			selector=  xpath.compile(value).load();
+			selector = xpath.compile(value).load();
 
 		} catch (SaxonApiException e) {
 			// TODO Auto-generated catch block
@@ -19,11 +19,8 @@ public class XPath {
 	public XPathSelector getSelector(){
 		return selector;
 	}
-	
 	public void select(XdmNode doc){		
 		try {
-
-			
 			selector.setContextItem(doc);
 		} catch (SaxonApiException e) {
 			// TODO Auto-generated catch block

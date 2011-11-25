@@ -15,10 +15,18 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionBuilder;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.PosixParser;
 import org.w3c.dom.*;
+
 import net.sf.saxon.s9api.*;
 
-public class Main {
+public class Main{
 	private XSLT _xslt_movie;
 	private XSLT _xslt_review;
 	private XPath _xpath_title;
@@ -27,9 +35,20 @@ public class Main {
 	private RTProcessor _rt;
 	private DocumentBuilder _docBuilder;
 	private net.sf.saxon.s9api.DocumentBuilder _saxDocBuilder;
+	private ArrayList<URL> movieURLList;
 
+	private String mainOutputFile;
+	private String movieXMLOutputFolder;
+	
+	private String outputURLListFolder;
+	private boolean outputURLList = false;
+	
+	private int maxProcessed = -1;
 
-	public Main () throws ParserConfigurationException {
+	private Document xmlFileListDoc;
+	private Element xmlFileListElement;
+	
+	public Main (String _mainOutputFile)  throws ParserConfigurationException {
 
 		_xslt_movie = new XSLT("schema/imdb.xslt");
 		_xslt_review = new XSLT("schema/imdb_review.xslt");
@@ -47,36 +66,68 @@ public class Main {
 		docFactory.setIgnoringElementContentWhitespace(true);
 		_docBuilder = docFactory.newDocumentBuilder();
 
+		mainOutputFile = _mainOutputFile;
+		xmlFileListDoc = _docBuilder.newDocument();
+		xmlFileListElement = xmlFileListDoc.createElement("list");
+
+	
+		
 	}
 	
-	public void extractMovies(ArrayList<URL> moviesURL, int startAt, int stopAt){
-		int count = 0;
-		boolean isInit = true;
-		
-		for(URL movieURL: moviesURL){
-			count++;
-			if(isInit && startAt != count) continue;
-			else isInit = false;
-			if(stopAt != 0 && count > stopAt) return;
-		
+	
+	public void setOutputURLList(String path){
+		 outputURLList = true;
+		 outputURLListFolder = path;
+	}
+	
+	public void setMaxProcessed(int n){
+		maxProcessed = n;
+	}
+
+	
+
+
+	private void addXMLFile(String path){
+		Element item = xmlFileListDoc.createElement("entry");
+		item.appendChild(xmlFileListDoc.createTextNode(path));
+		xmlFileListElement.appendChild(item);
+	}
+	
+
+    
+    public void extractMovies(String _movieXMLOutputFolder){
+    	extractMovies(_movieXMLOutputFolder,movieURLList,0,-1);
+    }
+    
+	public void extractMovies(String _movieXMLOutputFolder, ArrayList<URL> moviesURL, int startAt, int stopAt){
+		movieXMLOutputFolder = _movieXMLOutputFolder;
+		if(stopAt == -1) stopAt = moviesURL.size();
+		if(maxProcessed <0) maxProcessed = Integer.MAX_VALUE;
+		for(int count = startAt; count < stopAt; count++){
+			if(maxProcessed==0) return;
+			maxProcessed--;
+			URL movieURL = moviesURL.get(count);
 			try {
-				processUrl(movieURL, count);
+				System.out.print("-- #"+(count+1)+": Extracting "+movieURL+"...");
+				processUrl(movieURL);
+				System.out.println("-------------");
 			} catch (IOException ex) {
 				System.out.println("ERROR "+ex.getMessage());
 			} catch (SaxonApiException ex) {
 				System.out.println("ERROR "+ex.getMessage());
 			}
+			
 		}
 	}
 
-	private void processUrl ( URL movieURL, int count )
+	private void processUrl ( URL movieURL)
 			throws IOException, SaxonApiException {
 		Document imdb_movie = _docBuilder.newDocument();
 		DOMDestination dest = new DOMDestination(imdb_movie);
 		String title = movieURL.getPath();
 		title = title.substring(7, title.length()-1);
 	
-		System.out.print("#"+count+": Querying "+movieURL+"...");
+
 		Node ms= _web.getNode(movieURL);
 		System.out.println("done downloading.");
 	
@@ -117,27 +168,44 @@ public class Main {
 		_xslt_review.transform(_saxDocBuilder.wrap(rs),dest);
 		System.out.println("done.");
 	
-		String outputFile = "data/movies/"+title+".xml";
+		String outputFile = movieXMLOutputFolder+"/"+title+".xml";
+		
+		File folder = new File(movieXMLOutputFolder);
+		
+		if(folder.exists()){
+			if(!folder.isDirectory()){
+				throw new IOException("Error: supplied output XML path is not a directory.");
+			}
+		}else{
+			if(!folder.mkdirs()){
+				throw new IOException("Error: could not create XML output directory.");
+			}
+		}
+		
 		OutputStream out = new BufferedOutputStream(new FileOutputStream(new File(outputFile)));
 		Serializer s = SAXProcessor.getProcessor().newSerializer(out);
 	
-		Element root = mergeImdbRtResults(imdb_movie, imdb_reviews, original_title, year);
+		Element root = buildMovieRtImdb(imdb_movie, imdb_reviews, original_title, year);
 
 		s.serializeNode(_saxDocBuilder.wrap(root));
 	
 		System.out.println("Output written on "+outputFile+" for movie "+original_title+"("+year+")");
-		System.out.println("-------------");
+		addXMLFile(outputFile);
 	
 
 	}
 
-	private Element mergeImdbRtResults ( Document imdb_movie, Document imdb_reviews, String original_title, String year )
+	private Element buildMovieRtImdb ( Document imdb_movie, Document imdb_reviews, String original_title, String year )
 			throws IOException, SaxonApiException {
+		
 		Document rt_movie = _docBuilder.newDocument();
 		Document rt_reviews = _docBuilder.newDocument();
-		Document doc = _docBuilder.newDocument();
+		Document doc =  _docBuilder.newDocument();
+		Element root = doc.createElement("movies");
+		Element subroot = doc.createElement("movie");
 		
-		Element root = doc.createElement("movie");
+		root.appendChild(subroot);
+		
 		
 		boolean ok;
 		try {
@@ -152,118 +220,211 @@ public class Main {
 		}
 		
 		if( ok ) {
+			// Found title on RT
 			NodeList nl = imdb_movie.getFirstChild().getChildNodes();
 			for(int i=0; i < nl.getLength(); i++) {
-				root.appendChild(doc.importNode(nl.item(i), true));
+				subroot.appendChild(doc.importNode(nl.item(i), true));
 			}
 			nl = rt_movie.getFirstChild().getChildNodes();
 			for(int i=0; i < nl.getLength(); i++) {
-				root.appendChild(doc.importNode(nl.item(i), true));
+				subroot.appendChild(doc.importNode(nl.item(i), true));
 			}
 			nl = imdb_reviews.getFirstChild().getChildNodes();
 			for(int i=0; i < nl.getLength(); i++) {
-				root.appendChild(doc.importNode(nl.item(i), true));
+				subroot.appendChild(doc.importNode(nl.item(i), true));
 			}
 			nl = rt_reviews.getFirstChild().getChildNodes();
 			for(int i=0; i < nl.getLength(); i++) {
-				root.appendChild(doc.importNode(nl.item(i), true));
+				subroot.appendChild(doc.importNode(nl.item(i), true));
 			}
 		} else {
+			// Could not find title on RT
 			NodeList nl = imdb_movie.getFirstChild().getChildNodes();
 			for(int i=0; i < nl.getLength(); i++) {
-				root.appendChild(doc.importNode(nl.item(i), true));
+				subroot.appendChild(doc.importNode(nl.item(i), true));
 			}
 			nl = imdb_reviews.getFirstChild().getChildNodes();
 			for(int i=0; i < nl.getLength(); i++) {
-				root.appendChild(doc.importNode(nl.item(i), true));
+				subroot.appendChild(doc.importNode(nl.item(i), true));
 			}
 		}
 		
 		return root;
 	}
 
-	
+	/*
 	@SuppressWarnings("unchecked")
-	public void extractFromFile(String fileName, int startAt, int stopAt)
-			throws FileNotFoundException, IOException, ClassNotFoundException {
+	public void extractMoviesFromFile(String fileName, int startAt, int stopAt) throws FileNotFoundException, IOException, ClassNotFoundException {
 		System.out.println("Processing list of movies at "+fileName+" starting from #"+startAt+".");
 		ObjectInputStream ios;
 		ios = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(fileName))));
-		
 		ArrayList<URL> readObject = (ArrayList<URL>)ios.readObject();
-		
 		extractMovies(readObject,startAt, stopAt);
 		
 		System.out.print("Done processing list of movies at "+fileName+".");
 	}
 	
-	public void extractFromFile(String fileName)
+	public void extractMoviesFromFile(String fileName)
 			throws FileNotFoundException, IOException, ClassNotFoundException{
-		extractFromFile(fileName, 1, 0);
-	}
+		extractMoviesFromFile(fileName, 0, -1);
+	}*/
 	
 	public void extractIMDBMovieList(String year, int pageFrom, int pageTo)
 			throws FileNotFoundException, IOException {
+		
 		IMDBMovieListExtractor movieExtractor= new IMDBMovieListExtractor(_saxDocBuilder);
 
-		System.out.println("Extracting IMDB list, year "+ year +" pages from "+pageFrom+" to "+(pageTo-1)+".");
-		ArrayList<URL> list = movieExtractor.getList(year, pageFrom, pageTo);
-		String outputFile = "data/IMDB_y"+year+"("+pageFrom+","+(pageTo-1)+").object";
-		System.out.println("Done, extracted "+list.size()+" movie URLs. Output at "+outputFile+".");
-		ObjectOutputStream oos;
-
-		oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File(outputFile))));
-	
-		oos.writeObject(list);
-		oos.close();
+		System.out.println("Extracting IMDB list, year "+ year +" pages from "+pageFrom+" to "+(pageTo)+".");
+		movieURLList = movieExtractor.getList(year, pageFrom, pageTo);
+		System.out.println("Done, extracted "+ movieURLList.size()+" movie URLs.");
+		
+		if (outputURLList){
+			String outputFile = outputURLListFolder+"/IMDB_y"+year+"("+pageFrom+","+(pageTo)+").object";
+			System.out.println("Saved output at "+outputFile+".");
+			ObjectOutputStream oos;
+			oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File(outputFile))));
+			oos.writeObject( movieURLList);
+			oos.close();
+		}
+		
+		
 	}
-
-	public void mergeFiles(String output)
-			throws IllegalArgumentException, IOException, SaxonApiException, TransformerFactoryConfigurationError, TransformerException {
-		
-		Document doc = _docBuilder.newDocument();
-		Element root = doc.createElement("list");
-		
-		File dir = new File("data/movies");
+	
+	public void inputMoviesFromDirectory(String path) throws IllegalArgumentException, IOException, SaxonApiException, TransformerFactoryConfigurationError, TransformerException{
+		File dir = new File(path);
 		FilenameFilter filter = new FilenameFilter() {
 		    public boolean accept(File dir, String name) {
-		        return name.endsWith(".xml") && name.startsWith("tt");
+		        return name.endsWith(".xml");
 		    }
 		};
 		String[] children = dir.list(filter);
-		
 		if (children == null) {
 		    // Either dir does not exist or is not a directory
 		} else {
 		    for (int i=0; i<children.length; i++) {
-		        // Get filename of file or directory
-				Element item = doc.createElement("entry");
-				item.appendChild(doc.createTextNode(children[i]));
-				root.appendChild(item);
+		    	addXMLFile(path+"/"+children[i]);
 		  }
 		}		
+
+	}
+	
+	public void output()
+			throws IllegalArgumentException, IOException, SaxonApiException, TransformerFactoryConfigurationError, TransformerException {
+
 		
 
 		XSLT xslt_merge = new XSLT("schema/merge.xslt");
-		String outputFile = "data/"+output+".xml";
+	
 		
-		Document merged = _docBuilder.newDocument();
-		DOMDestination dest = new DOMDestination(merged);
+        File file = new File(mainOutputFile);
+		Destination dest = new Serializer(file);
 
-        File file = new File(outputFile);
-        Result result = new StreamResult(file);
-
-		xslt_merge.transform(_saxDocBuilder.wrap(root), dest);
-        Transformer xformer = TransformerFactory.newInstance().newTransformer();
-        xformer.transform(new DOMSource(merged), result);		
+		xslt_merge.transform(_saxDocBuilder.wrap(xmlFileListElement), dest);
+        
+        System.out.println("Done processing movies, output XML at: "+mainOutputFile);
 	}
 	
+	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
 		try {
-			Main main = new Main();
-			//main.extractIMDBMovieList("1980",0,4);
-			//main.extractFromFile("data/IMDB_y1960(0,9).object",251,400);
-			main.mergeFiles("data");
+			Options options = new Options();
+			Option maxProcessed = OptionBuilder.withArgName("number")
+				.hasArgs(1)
+				.withDescription("max number of processed movies")
+				.withLongOpt("countmax")
+				.create("c");
+			Option help = OptionBuilder
+				.hasArgs(0)
+				.withDescription("print help")
+				.withLongOpt("help")
+				.create("h");
+			Option outputFile = OptionBuilder.withArgName( "outputfile")
+				.hasArgs(1)
+				.withDescription("output .xml file")
+				.withLongOpt("output")
+				.create("o");
+		/*	Option movieListInput = OptionBuilder.withArgName( "listinputfile")
+				.hasArgs(1)
+				.withDescription("movie list input file")
+				.withLongOpt("listinput")
+				.create("li");
+			Option movieListOutput = OptionBuilder.withArgName( "listoutputfile")
+				.hasArgs(1)
+				.withDescription("movie list output file")
+				.withLongOpt("listoutput")
+				.create("lo");*/
+		/*	Option moviesXMLOutput = OptionBuilder.withArgName( "path")
+				.hasArgs(1)
+				.withDescription("where to save movie XMLs")
+				.withLongOpt("xmloutput")
+				.create("x");*/
+			Option moviesXMLInput = OptionBuilder.withArgName( "path")
+        		.hasArgs(1)
+	        	.withLongOpt("merge")
+	        	.withDescription( "merge XML database movies")
+	        	.create( "m" );
+			Option buildList = OptionBuilder.withArgName( "path year pageFrom pageTo")
+	        	.hasArgs(3)
+	        	.withLongOpt("build")
+	        	.withDescription( "extract movies from a given year, save an xml for each movie" )
+	        	.create( "b" );
+			
+			
+			// add t option
+			options.addOption(moviesXMLInput);
+			options.addOption(maxProcessed);
+			options.addOption(help);
+	//		options.addOption(movieListInput);
+		//	options.addOption(movieListOutput);
+			options.addOption(outputFile);
+			options.addOption(buildList);
+			//options.addOption(moviesXMLOutput);
+			
+			CommandLineParser parser = new PosixParser();
+			CommandLine cmd = parser.parse( options, args);
+	
+			if(cmd.hasOption(help.getOpt())){
+				HelpFormatter formatter = new HelpFormatter();
+				formatter.printHelp( "webdata", options );
+				return;
+			}
+			
+			
+			String mainOutputFile;
+			if(cmd.hasOption(outputFile.getOpt())){
+				mainOutputFile = cmd.getOptionValues(outputFile.getOpt())[0];
+			}else{
+				mainOutputFile = "out.xml";
+				System.out.println("[OPT] No output file supplied, defaulting to "+ mainOutputFile);
+			}
+							
+			
+			Main main = new Main(mainOutputFile);
+
+			if(cmd.hasOption(maxProcessed.getOpt())){
+				main.setMaxProcessed(Integer.parseInt(cmd.getOptionValues(maxProcessed.getOpt())[0]));		
+			}
+			/*if(cmd.hasOption(movieListOutput.getOpt())){
+				main.setOutputURLList(cmd.getOptionValues(movieListOutput.getOpt())[0]);			
+			}*/
+			
+			if(cmd.hasOption(moviesXMLInput.getOpt())){
+				System.out.println("[OPT] Merge input XML files.");
+				main.inputMoviesFromDirectory(cmd.getOptionValues(moviesXMLInput.getOpt())[0]);
+			}
+			
+			if(cmd.hasOption(buildList.getOpt())){
+				String values[] = cmd.getOptionValues(buildList.getOpt());
+				System.out.println("[OPT] Build IMDB Titles from Web.");
+				main.extractIMDBMovieList(values[1],Integer.parseInt(values[2]),Integer.parseInt(values[3]));
+				main.extractMovies(values[0]);
+			}
+			
+
+			main.output();
+			
+
+
 		} catch ( Exception e ) {
 			e.printStackTrace();
 
