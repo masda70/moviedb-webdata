@@ -1,0 +1,84 @@
+\documentclass[a4]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathabx}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%\usepackage{a4wide}
+
+\author{MONTOYA David, CONTAL Emile}
+\title{Web Data Management\\Compte rendu de projet}
+\date{automne 2011}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Nous avons choisi de baser notre projet sur le chapitre
+\textit{Putting into Practice - Wrappers and Data Extraction with XSLT}
+du livre de référence.
+Notre idée a été de créer un schéma pour combiner l'information issue
+de différentes bases de données de films telles que
+\verb imdb.com , \verb rottentomatoes.com  , \verb allocine.fr ,
+et ainsi en construire un profil pour chaque film
+contenant par exemple un croisement des critiques, \textit{tags} ou notes
+de chacune des bases de données.
+
+\section{Construction de la liste de film}
+La première étape du projet a été de trouver un moyen de parcourir
+la liste des films dont nous souhaitons extraire l'information.
+Les bases de données internet ne permettent pas d'accéder à la liste
+de leur contenu et il est nécessaire d'utiliser les fonctions disponibles
+pour un utilisateur, comme une recherche ``manuelle'' de films.
+Il s'est avéré plus efficace d'extraire initialement
+des liens pointant vers les pages des films 
+(ici sur \verb imdb.com  grâce à la fonction de recherche par période,
+puis en parcourant les batchs de résultats page par page)
+que de chercher à faire correspondre une page à un nom de film.
+Même si le titre d'un film et son année de production est un bon
+identifiant, il reste des exceptions qui complexifient la tâche.
+
+\section{Extraction de données}
+Une fois la page internet d'un film récupérée il est inévitable
+de devoir la transformer pour obtenir une structure valide.
+Nous avons essayé plusieurs \textit{html cleaner}
+et le plus robuste a été \textit{TagSoup}.
+Nous travaillions toujours sur les arbres construits en mémoire
+pour plus de flexibilité.
+L'extraction des données se fait grâce à XSLT.
+Les fonctionnalités simples d'xslt ont été suffisantes
+\footnote{Hormis quelques formatages utilisant des expressions régulières simples}
+ pour que l'on puisse extraire l'ensemble des informations
+que l'on s'était fixées dans notre DTD.
+
+Pour chaque film d'\verb imdb , on va chercher la page correspondante
+sur d'autres sites (ici seulement \verb rottentomatoes.com )
+via une requête google.
+La réponse est en effet plus rapide et plus précise qu'en utilisant
+les moteurs de recherche internes aux sites.
+
+\section{Assembler les données}
+Il est ensuite aisé de fusionner toute l'information structurée acquise
+sur les différentes pages (fiches techniques et critiques pour chaque site)
+en un document xml par film.
+
+Notre base de donnée finale est générée par
+la combinaison de ces fichiers grâce à la fonction \verb document  d'XSLT.
+On obtient ainsi un unique document xml validant notre DTD,
+pouvant servir de base pour répondre à des requêtes diverses
+(consultation d'information, croisements, analyses, ...
+sont facilement traités par XSLT).
+
+\section{Utilisation}
+\verb trollface.jpg  ;)
+
+\section{Amélioration envisageables}
+Pour enrichir la base de donnée, il faudrait étendre le processus
+à d'autres sites en écrivant la feuille XSLT correspondante.
+Il serait alors intéressant de paralléliser les requêtes
+pour ne pas perdre trop temps en communiquant avec les différents serveurs.
+
+\end{document}
