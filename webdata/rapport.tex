@@ -36,7 +36,7 @@ Une fois la page internet d'un film récupérée il est inévitable
 de devoir la transformer pour obtenir une structure valide.
 Nous avons essayé plusieurs parseurs pour nettoyer nos sources HTML et on a été satisfaits par le résultat de \textit{TagSoup}.
 Nous travaillions toujours sur les arbres construits en mémoire
-pour flexibilité maximale.
+pour une flexibilité maximale.
 L'extraction des données se fait grâce à XSLT.
 Les fonctionnalités simples d'XSLT ont été suffisantes
 \footnote{Hormis quelques formatages utilisant des expressions régulières simples} pour que l'on puisse extraire l'ensemble des informations
@@ -54,7 +54,7 @@ On procède, pour chaque lien IMDB \textit{url}, ainsi:
 Il est ensuite aisé de fusionner toute l'information structurée acquise
 sur les différentes pages en un document XML par film.
 
-Notre résultat final est génére par la combinaison de ces fichiers grâce à la fonction \verb document  d'XSLT.
+Notre résultat final est généré par la combinaison de ces fichiers grâce à la fonction \verb document  d'XSLT.
 On obtient ainsi un unique document XML validant notre modèle de données (movie.dtd), pouvant servir de base pour répondre à des requêtes diverses
 (consultation d'information, croisements, analyses, ...).
 
