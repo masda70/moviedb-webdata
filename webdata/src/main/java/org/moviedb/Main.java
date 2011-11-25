@@ -251,23 +251,6 @@ public class Main{
 		
 		return root;
 	}
-
-	/*
-	@SuppressWarnings("unchecked")
-	public void extractMoviesFromFile(String fileName, int startAt, int stopAt) throws FileNotFoundException, IOException, ClassNotFoundException {
-		System.out.println("Processing list of movies at "+fileName+" starting from #"+startAt+".");
-		ObjectInputStream ios;
-		ios = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(fileName))));
-		ArrayList<URL> readObject = (ArrayList<URL>)ios.readObject();
-		extractMovies(readObject,startAt, stopAt);
-		
-		System.out.print("Done processing list of movies at "+fileName+".");
-	}
-	
-	public void extractMoviesFromFile(String fileName)
-			throws FileNotFoundException, IOException, ClassNotFoundException{
-		extractMoviesFromFile(fileName, 0, -1);
-	}*/
 	
 	public void extractIMDBMovieList(String year, int pageFrom, int pageTo)
 			throws FileNotFoundException, IOException {
@@ -343,21 +326,6 @@ public class Main{
 				.withDescription("output .xml file")
 				.withLongOpt("output")
 				.create("o");
-		/*	Option movieListInput = OptionBuilder.withArgName( "listinputfile")
-				.hasArgs(1)
-				.withDescription("movie list input file")
-				.withLongOpt("listinput")
-				.create("li");
-			Option movieListOutput = OptionBuilder.withArgName( "listoutputfile")
-				.hasArgs(1)
-				.withDescription("movie list output file")
-				.withLongOpt("listoutput")
-				.create("lo");*/
-		/*	Option moviesXMLOutput = OptionBuilder.withArgName( "path")
-				.hasArgs(1)
-				.withDescription("where to save movie XMLs")
-				.withLongOpt("xmloutput")
-				.create("x");*/
 			Option moviesXMLInput = OptionBuilder.withArgName( "path")
         		.hasArgs(1)
 	        	.withLongOpt("merge")
@@ -374,11 +342,8 @@ public class Main{
 			options.addOption(moviesXMLInput);
 			options.addOption(maxProcessed);
 			options.addOption(help);
-	//		options.addOption(movieListInput);
-		//	options.addOption(movieListOutput);
 			options.addOption(outputFile);
 			options.addOption(buildList);
-			//options.addOption(moviesXMLOutput);
 			
 			CommandLineParser parser = new PosixParser();
 			CommandLine cmd = parser.parse( options, args);
@@ -404,9 +369,6 @@ public class Main{
 			if(cmd.hasOption(maxProcessed.getOpt())){
 				main.setMaxProcessed(Integer.parseInt(cmd.getOptionValues(maxProcessed.getOpt())[0]));		
 			}
-			/*if(cmd.hasOption(movieListOutput.getOpt())){
-				main.setOutputURLList(cmd.getOptionValues(movieListOutput.getOpt())[0]);			
-			}*/
 			
 			if(cmd.hasOption(moviesXMLInput.getOpt())){
 				System.out.println("[OPT] Merge input XML files.");
