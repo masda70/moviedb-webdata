@@ -258,7 +258,8 @@ public class Main{
 		IMDBMovieListExtractor movieExtractor= new IMDBMovieListExtractor(_saxDocBuilder);
 
 		System.out.println("Extracting IMDB list, year "+ year +" pages from "+pageFrom+" to "+(pageTo)+".");
-		movieURLList = movieExtractor.getList(year, pageFrom, pageTo);
+		movieURLList = movieExtractor.getList(year, pageFrom, pageTo,maxProcessed);
+
 		System.out.println("Done, extracted "+ movieURLList.size()+" movie URLs.");
 		
 		if (outputURLList){
@@ -332,7 +333,7 @@ public class Main{
 	        	.withDescription( "merge XML database movies")
 	        	.create( "m" );
 			Option buildList = OptionBuilder.withArgName( "path year pageFrom pageTo")
-	        	.hasArgs(3)
+	        	.hasArgs(4)
 	        	.withLongOpt("build")
 	        	.withDescription( "extract movies from a given year, save an xml for each movie" )
 	        	.create( "b" );
@@ -341,9 +342,9 @@ public class Main{
 			// add t option
 			options.addOption(moviesXMLInput);
 			options.addOption(maxProcessed);
-			options.addOption(help);
-			options.addOption(outputFile);
 			options.addOption(buildList);
+			options.addOption(outputFile);
+			options.addOption(help);
 			
 			CommandLineParser parser = new PosixParser();
 			CommandLine cmd = parser.parse( options, args);

@@ -26,7 +26,7 @@ public class IMDBMovieListExtractor {
 		xpath = new XPath("//td[@class='title']/a/@href");
 	}
 	
-	public ArrayList<URL> getList(String year, int pageFrom, int pageTo) {
+	public ArrayList<URL> getList(String year, int pageFrom, int pageTo, int max) {
 		ArrayList<URL> urlList;
 		if(pageTo == -1){
 			urlList = new ArrayList<URL>();
@@ -34,7 +34,7 @@ public class IMDBMovieListExtractor {
 		}else{
 			urlList = new ArrayList<URL>((pageTo-pageFrom+1)*IMDB_MOVIESPERPAGE);
 		}
-		
+		if(max < 0) max= Integer.MAX_VALUE;
 		for(int i=pageFrom; i<=pageTo; i++ ){
 			int index = 1+i*IMDB_MOVIESPERPAGE;
 			try {
@@ -64,7 +64,9 @@ public class IMDBMovieListExtractor {
 					
 			        for (XdmItem item: xpath.getSelector()) {
 			        	urlList.add(new URL(imdbHOME+item.getStringValue()));
+			        	max--;
 			        }
+			        if(max == 0) break;
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			} catch (UnsupportedEncodingException e) {
